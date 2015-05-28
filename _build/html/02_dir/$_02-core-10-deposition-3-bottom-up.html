@@ -1,0 +1,176 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>OnLine Bottom Up Deposition &mdash; CasperJS  documentation</title>
+    
+    <link rel="stylesheet" href="../_static/basic.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/jsdemo.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/sphinxcontrib-images/LightBox2/lightbox2/css/lightbox.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/jsdemo.js"></script>
+    <script type="text/javascript" src="../_static/sphinxcontrib-images/LightBox2/lightbox2/js/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="../_static/sphinxcontrib-images/LightBox2/lightbox2/js/lightbox.min.js"></script>
+    <script type="text/javascript" src="../_static/sphinxcontrib-images/LightBox2/lightbox2-customize/jquery-noconflict.js"></script>
+    <link rel="shortcut icon" href="../_static/casperjs-favicon.ico"/>
+    <link rel="top" title="CasperJS  documentation" href="../index.html" />
+    <link rel="up" title="Data Depository" href="$_02-core-10-deposition.html" />
+    <link rel="next" title="Nutrition Mathematics" href="$_02-core-11-mathematics.html" />
+    <link rel="prev" title="OnLine Top Down Deposition" href="$_02-core-10-deposition-2-top-down.html" />
+    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Asap:400,700,400italic,700italic&amp;subset=latin,latin-ext">
+    <link rel="stylesheet" title="Dark theme" href="../_static/casperjs-dark.css">
+    <link rel="alternate stylesheet" title="Light theme" href="../_static/casperjs-light.css">
+    <script type="text/javascript" src="../_static/style-switcher.js"></script>
+
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="$_02-core-11-mathematics.html" title="Nutrition Mathematics"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="$_02-core-10-deposition-2-top-down.html" title="OnLine Top Down Deposition"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">CasperJS  documentation</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="$_02-core.html" >Features - Core</a> &raquo;</li>
+          <li class="nav-item nav-item-2"><a href="$_02-core-10-deposition.html" accesskey="U">Data Depository</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="online-bottom-up-deposition">
+<span id="core-10-deposition-3-bottom-up"></span><h1>OnLine Bottom Up Deposition<a class="headerlink" href="#online-bottom-up-deposition" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="table-of-contents">
+<h2>Table of Contents<a class="headerlink" href="#table-of-contents" title="Permalink to this headline">¶</a></h2>
+<div class="contents local topic" id="contents">
+<ul class="simple">
+<li><a class="reference internal" href="#process" id="id1">Process</a></li>
+<li><a class="reference internal" href="#concept" id="id2">Concept</a></li>
+<li><a class="reference internal" href="#vocal-terms" id="id3">Vocal Terms</a></li>
+</ul>
+</div>
+<div class="section" id="process">
+<h3><a class="toc-backref" href="#id1">Process</a><a class="headerlink" href="#process" title="Permalink to this headline">¶</a></h3>
+<p>Ontology driven process that classifies a food according to precise ontology terms.</p>
+<ul class="simple">
+<li>Initiate <a class="reference internal" href="../10_dir/$_10-term-project.html#terms-conversation"><span>conversation</span></a>  by traversing a <a class="reference internal" href="../10_dir/$_10-term-project.html#terms-graph"><span>graph</span></a>  and selecting appropriate terms.</li>
+<li>Use a broad term when there is insufficient information to use a more narrow, precise term.</li>
+</ul>
+<p><a class="reference internal" href="../10_dir/$_10-term-project.html#terms-conversation"><span>Conversation</span></a>  has three stages:</p>
+<ul class="simple">
+<li>identify unique terms [source; part of source; origin of source]</li>
+<li>identify combinations of terms that are <a class="reference internal" href="../10_dir/$_10-term-project.html#terms-jointwith"><span>jointWith</span></a>  and <a class="reference internal" href="../10_dir/$_10-term-project.html#terms-disjointwith"><span>disjointWith</span></a></li>
+<li>identify data associated with ontology terms.</li>
+</ul>
+</div>
+<div class="section" id="concept">
+<h3><a class="toc-backref" href="#id2">Concept</a><a class="headerlink" href="#concept" title="Permalink to this headline">¶</a></h3>
+<div class="figure align-center">
+<img alt="../_images/$_02-core-10-deposition-3-bottom-up_.png" src="../_images/$_02-core-10-deposition-3-bottom-up_.png" />
+</div>
+</div>
+<div class="section" id="vocal-terms">
+<h3><a class="toc-backref" href="#id3">Vocal Terms</a><a class="headerlink" href="#vocal-terms" title="Permalink to this headline">¶</a></h3>
+<p>terms to support bottom-up</p>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Document Outline</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">OnLine Bottom Up Deposition</a><ul>
+<li><a class="reference internal" href="#table-of-contents">Table of Contents</a><ul>
+<li><a class="reference internal" href="#process">Process</a></li>
+<li><a class="reference internal" href="#concept">Concept</a></li>
+<li><a class="reference internal" href="#vocal-terms">Vocal Terms</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="$_02-core-10-deposition-2-top-down.html"
+                        title="previous chapter">OnLine Top Down Deposition</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="$_02-core-11-mathematics.html"
+                        title="next chapter">Nutrition Mathematics</a></p><h3>Index</h3>
+<p><a href="../genindex.html">Thesaurus</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../_sources/02_dir/$_02-core-10-deposition-3-bottom-up.txt"
+           rel="nofollow">Show Source</a></li>
+   
+  </ul>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="$_02-core-11-mathematics.html" title="Nutrition Mathematics"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="$_02-core-10-deposition-2-top-down.html" title="OnLine Top Down Deposition"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">CasperJS  documentation</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="$_02-core.html" >Features - Core</a> &raquo;</li>
+          <li class="nav-item nav-item-2"><a href="$_02-core-10-deposition.html" >Data Depository</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &copy; Copyright 2011-2015 Nicolas Perriault and contributors. CasperJS logo by Jeremy Forveille.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.1.
+    </div>
+  </body>
+</html>

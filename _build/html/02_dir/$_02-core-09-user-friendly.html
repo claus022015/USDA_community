@@ -1,0 +1,193 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>User Friendly Designs &mdash; CasperJS  documentation</title>
+    
+    <link rel="stylesheet" href="../_static/basic.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/jsdemo.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/sphinxcontrib-images/LightBox2/lightbox2/css/lightbox.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/jsdemo.js"></script>
+    <script type="text/javascript" src="../_static/sphinxcontrib-images/LightBox2/lightbox2/js/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="../_static/sphinxcontrib-images/LightBox2/lightbox2/js/lightbox.min.js"></script>
+    <script type="text/javascript" src="../_static/sphinxcontrib-images/LightBox2/lightbox2-customize/jquery-noconflict.js"></script>
+    <link rel="shortcut icon" href="../_static/casperjs-favicon.ico"/>
+    <link rel="top" title="CasperJS  documentation" href="../index.html" />
+    <link rel="up" title="Features - Core" href="$_02-core.html" />
+    <link rel="next" title="Data Depository" href="$_02-core-10-deposition.html" />
+    <link rel="prev" title="Generic Verbs and Nouns" href="$_02-core-08-relationships.html" />
+    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Asap:400,700,400italic,700italic&amp;subset=latin,latin-ext">
+    <link rel="stylesheet" title="Dark theme" href="../_static/casperjs-dark.css">
+    <link rel="alternate stylesheet" title="Light theme" href="../_static/casperjs-light.css">
+    <script type="text/javascript" src="../_static/style-switcher.js"></script>
+
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="$_02-core-10-deposition.html" title="Data Depository"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="$_02-core-08-relationships.html" title="Generic Verbs and Nouns"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">CasperJS  documentation</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="$_02-core.html" accesskey="U">Features - Core</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="user-friendly-designs">
+<span id="core-09-user-friendly"></span><h1>User Friendly Designs<a class="headerlink" href="#user-friendly-designs" title="Permalink to this headline">¶</a></h1>
+<p id="return-to-top-02-core-09-user-friendly">This section addresses:</p>
+<dl class="role">
+<dt id="role-USDA #1">
+<code class="descname">:USDA #1:</code><a class="headerlink" href="#role-USDA #1" title="Permalink to this definition">¶</a></dt>
+<dd><p>User-friendly design for rapid deposition, manipulation, and retrieval of data with capability of specific queries.</p>
+</dd></dl>
+
+<div class="section" id="table-of-contents">
+<h2>Table of Contents<a class="headerlink" href="#table-of-contents" title="Permalink to this headline">¶</a></h2>
+<div class="contents local topic" id="contents">
+<ul class="simple">
+<li><a class="reference internal" href="#ontomatica-navigator" id="id8">Ontomatica Navigator</a></li>
+<li><a class="reference internal" href="#navigator-s-underlying-data-structures" id="id9">Navigator&#8217;s Underlying Data Structures</a></li>
+<li><a class="reference internal" href="#navigator-and-usda-label-project" id="id10">Navigator and USDA Label Project</a></li>
+</ul>
+</div>
+<div class="section" id="ontomatica-navigator">
+<h3><a class="toc-backref" href="#id8">Ontomatica Navigator</a><a class="headerlink" href="#ontomatica-navigator" title="Permalink to this headline">¶</a></h3>
+<p>Ontomatica&#8217;s <a class="reference internal" href="../10_dir/$_10-term-project.html#terms-navigator"><span>Navigator</span></a>  architecture is similar to other modern navigation systems. The Volkswagen <a class="reference external" href="http://www.vw.com/find-match/engine/">&#8220;Find a Match&#8221; application</a> is one example.</p>
+<div class="figure align-center">
+<img alt="../_images/$_02-core-09-user-friendly-1-volkswagen_.png" src="../_images/$_02-core-09-user-friendly-1-volkswagen_.png" />
+</div>
+<p>The Volkswagen application navigates this <a class="reference external" href="http://ontorule-project.eu/parrot/parrot?documentUri=http://www.volkswagen.co.uk/vocabularies/vvo/ns.owl">ontology</a>. See also: <a href="#id1"><span class="problematic" id="id2">:cite:`5043`</span></a>  <a href="#id3"><span class="problematic" id="id4">:cite:`5044`</span></a> <a href="#id5"><span class="problematic" id="id6">:cite:`5045`</span></a>.</p>
+<p>Ontomatica&#8217;s Navigator, traversing the <a class="reference internal" href="../10_dir/$_10-term-project.html#terms-graph"><span>graphs</span></a>  implemented in the <a class="reference external" href="http://72.167.253.87/cgi-bin/flamenco.cgi/_Homeopathic_Remedies_-_14-01-16_/Flamenco?q=arthritis&amp;index=0">homeopathic application</a>, operates in the same way as the Volkswagen navigator, but use different data.</p>
+<div class="figure align-center">
+<img alt="../_images/$_02-core-09-user-friendly-2-homeopathic_.png" src="../_images/$_02-core-09-user-friendly-2-homeopathic_.png" />
+</div>
+</div>
+<div class="section" id="navigator-s-underlying-data-structures">
+<h3><a class="toc-backref" href="#id9">Navigator&#8217;s Underlying Data Structures</a><a class="headerlink" href="#navigator-s-underlying-data-structures" title="Permalink to this headline">¶</a></h3>
+<p>Volkswagen and Ontomatica use the same underlying technology for specifying and storing data. Both specify data using ontologies and store ontology representations in the following formats:</p>
+<ul class="simple">
+<li><a class="reference external" href="http://en.wikipedia.org/wiki/Web_Ontology_Language">Web Ontology Language</a>  (OWL)</li>
+<li><a class="reference external" href="http://en.wikipedia.org/wiki/Resource_Description_Framework">XML/RDF</a></li>
+<li><a class="reference external" href="http://en.wikipedia.org/wiki/JSON-LD">JSON-LD</a></li>
+</ul>
+</div>
+<div class="section" id="navigator-and-usda-label-project">
+<h3><a class="toc-backref" href="#id10">Navigator and USDA Label Project</a><a class="headerlink" href="#navigator-and-usda-label-project" title="Permalink to this headline">¶</a></h3>
+<p>Ontomatica Nobel Prize application illustrates <a class="reference internal" href="../10_dir/$_10-term-project.html#terms-application-service"><span>application services</span></a>  navigating <a class="reference internal" href="../10_dir/$_10-term-project.html#terms-data-service"><span>data services</span></a>  that manage content familiar to many. For example, here are <a class="reference external" href="http://72.167.253.87/cgi-bin/flamenco.cgi/_Nobel_Prize_Winners_-_14-01-16_/Flamenco?q=country:50/prize:1&amp;group=country">U.S. Nobel Laureates in Chemistry</a>.</p>
+<div class="figure align-center" id="id7">
+<img alt="../_images/$_02-core-09-user-friendly-3-nobel-prize_.png" src="../_images/$_02-core-09-user-friendly-3-nobel-prize_.png" />
+<p class="caption"><span class="caption-text">U.S. winners of the Nobel Prize for Chemistry</span></p>
+</div>
+<p><a class="reference internal" href="../10_dir/$_10-term-project.html#terms-complete-system"><span>Complete System</span></a>  will look and operate like the Nobel Prize applications and the Volkswagen &#8220;Find a Match&#8221; application.</p>
+<p>In place of the Nobel Laureate&#8217;s picture will be the branded food label image registered by a <a class="reference internal" href="../10_dir/$_10-term-project.html#terms-food-supplier"><span>supplier</span></a>  during the <a class="reference internal" href="../10_dir/$_10-term-project.html#terms-web-deposit"><span>web deposit</span></a>  process.</p>
+<p>All queries are represented as a <a class="reference external" href="http://en.wikipedia.org/wiki/Uniform_resource_identifier">Universal Resource Identifier</a>  (URI). This means that an <a class="reference internal" href="../10_dir/$_10-term-project.html#terms-end-user"><span>end user</span></a>, <a class="reference internal" href="../10_dir/$_10-term-project.html#terms-investigator"><span>investigator</span></a>  and supplier can easily link to and re-use a reference to a food.</p>
+<p>Ontomatica&#8217;s Navigator, as of 2015, is unique in the technology marketplace.</p>
+<p>Some modern tools enable a user to compose a query by selecting two or more single-level facets. An example is <a class="reference external" href="http://tools.nccor.org/css/">NCCOR</a>.</p>
+<p>Only Navigator enables a user to compose queries by selecting terms from multiple hierarchies of terms.</p>
+<p><a class="reference internal" href="#return-to-top-02-core-09-user-friendly"><span>Return to top</span></a></p>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Document Outline</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">User Friendly Designs</a><ul>
+<li><a class="reference internal" href="#table-of-contents">Table of Contents</a><ul>
+<li><a class="reference internal" href="#ontomatica-navigator">Ontomatica Navigator</a></li>
+<li><a class="reference internal" href="#navigator-s-underlying-data-structures">Navigator&#8217;s Underlying Data Structures</a></li>
+<li><a class="reference internal" href="#navigator-and-usda-label-project">Navigator and USDA Label Project</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="$_02-core-08-relationships.html"
+                        title="previous chapter">Generic Verbs and Nouns</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="$_02-core-10-deposition.html"
+                        title="next chapter">Data Depository</a></p><h3>Index</h3>
+<p><a href="../genindex.html">Thesaurus</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../_sources/02_dir/$_02-core-09-user-friendly.txt"
+           rel="nofollow">Show Source</a></li>
+   
+  </ul>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="$_02-core-10-deposition.html" title="Data Depository"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="$_02-core-08-relationships.html" title="Generic Verbs and Nouns"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">CasperJS  documentation</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="$_02-core.html" >Features - Core</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &copy; Copyright 2011-2015 Nicolas Perriault and contributors. CasperJS logo by Jeremy Forveille.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.1.
+    </div>
+  </body>
+</html>

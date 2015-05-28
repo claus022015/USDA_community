@@ -1,0 +1,1076 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>The tester module &mdash; CasperJS  documentation</title>
+    
+    <link rel="stylesheet" href="../_static/basic.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/jsdemo.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/sphinxcontrib-images/LightBox2/lightbox2/css/lightbox.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/jsdemo.js"></script>
+    <script type="text/javascript" src="../_static/sphinxcontrib-images/LightBox2/lightbox2/js/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="../_static/sphinxcontrib-images/LightBox2/lightbox2/js/lightbox.min.js"></script>
+    <script type="text/javascript" src="../_static/sphinxcontrib-images/LightBox2/lightbox2-customize/jquery-noconflict.js"></script>
+    <link rel="shortcut icon" href="../_static/casperjs-favicon.ico"/>
+    <link rel="top" title="CasperJS  documentation" href="../index.html" />
+    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Asap:400,700,400italic,700italic&amp;subset=latin,latin-ext">
+    <link rel="stylesheet" title="Dark theme" href="../_static/casperjs-dark.css">
+    <link rel="alternate stylesheet" title="Light theme" href="../_static/casperjs-light.css">
+    <script type="text/javascript" src="../_static/style-switcher.js"></script>
+
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="nav-item nav-item-0"><a href="../index.html">CasperJS  documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <span class="target" id="tester-module"></span><div class="section" id="the-tester-module">
+<span id="index-0"></span><h1>The <code class="docutils literal"><span class="pre">tester</span></code> module<a class="headerlink" href="#the-tester-module" title="Permalink to this headline">¶</a></h1>
+<p>Casper ships with a <code class="docutils literal"><span class="pre">tester</span></code> module and a <code class="docutils literal"><span class="pre">Tester</span></code> class providing an API for unit &amp; functional testing purpose. By default you can access an instance of this class through the <code class="docutils literal"><span class="pre">test</span></code> property of any <code class="docutils literal"><span class="pre">Casper</span></code> class instance.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The best way to learn how to use the Tester API and see it in action is probably to have a look at <a class="reference external" href="https://github.com/n1k0/casperjs/blob/master/tests/suites/">CasperJS&#8217; own test suites</a>.</p>
+</div>
+<div class="section" id="the-tester-prototype">
+<h2>The <code class="docutils literal"><span class="pre">Tester</span></code> prototype<a class="headerlink" href="#the-tester-prototype" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="assert">
+<h3><code class="docutils literal"><span class="pre">assert()</span></code><a class="headerlink" href="#assert" title="Permalink to this headline">¶</a></h3>
+<p><strong>Signature:</strong> <code class="docutils literal"><span class="pre">assert(Boolean</span> <span class="pre">condition[,</span> <span class="pre">String</span> <span class="pre">message])</span></code></p>
+<p>Asserts that the provided condition strictly resolves to a boolean <code class="docutils literal"><span class="pre">true</span></code>:</p>
+<div class="highlight-python"><div class="highlight"><pre>casper.test.assert(true, &quot;true&#39;s true&quot;);
+casper.test.assert(!false, &quot;truth is out&quot;);
+</pre></div>
+</div>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#assertnot">assertNot()</a></p>
+</div>
+</div>
+<div class="section" id="assertdoesntexist">
+<span id="index-1"></span><h3><code class="docutils literal"><span class="pre">assertDoesntExist()</span></code><a class="headerlink" href="#assertdoesntexist" title="Permalink to this headline">¶</a></h3>
+<p><strong>Signature:</strong> <code class="docutils literal"><span class="pre">assertDoesntExist(String</span> <span class="pre">selector[,</span> <span class="pre">String</span> <span class="pre">message])</span></code></p>
+<p>Asserts that an element matching the provided <span class="xref std std-ref">selector expression</span> doesn&#8217;t exists within the remote DOM environment:</p>
+<div class="highlight-python"><div class="highlight"><pre>casper.test.begin(&#39;assertDoesntExist() tests&#39;, 1, function(test) {
+    casper.start().then(function() {
+        this.setContent(&#39;&lt;div class=&quot;heaven&quot;&gt;&lt;/div&gt;&#39;);
+        test.assertDoesntExist(&#39;.taxes&#39;);
+    }).run(function() {
+        test.done();
+    });
+});
+</pre></div>
+</div>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#assertexists">assertExists()</a></p>
+</div>
+</div>
+<div class="section" id="assertequals">
+<h3><code class="docutils literal"><span class="pre">assertEquals()</span></code><a class="headerlink" href="#assertequals" title="Permalink to this headline">¶</a></h3>
+<p><strong>Signature:</strong> <code class="docutils literal"><span class="pre">assertEquals(mixed</span> <span class="pre">testValue,</span> <span class="pre">mixed</span> <span class="pre">expected[,</span> <span class="pre">String</span> <span class="pre">message])</span></code></p>
+<p>Asserts that two values are strictly equivalent:</p>
+<div class="highlight-python"><div class="highlight"><pre>casper.test.begin(&#39;assertEquals() tests&#39;, 3, function(test) {
+    test.assertEquals(1 + 1, 2);
+    test.assertEquals([1, 2, 3], [1, 2, 3]);
+    test.assertEquals({a: 1, b: 2}, {a: 1, b: 2});
+    test.done();
+});
+</pre></div>
+</div>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#assertnotequals">assertNotEquals()</a></p>
+</div>
+</div>
+<div class="section" id="asserteval">
+<span id="index-2"></span><h3><code class="docutils literal"><span class="pre">assertEval()</span></code><a class="headerlink" href="#asserteval" title="Permalink to this headline">¶</a></h3>
+<p><strong>Signature:</strong> <code class="docutils literal"><span class="pre">assertEval(Function</span> <span class="pre">fn[,</span> <span class="pre">String</span> <span class="pre">message,</span> <span class="pre">Mixed</span> <span class="pre">arguments])</span></code></p>
+<p>Asserts that a <a class="reference internal" href="casper.html#casper-evaluate"><span>code evaluation in remote DOM</span></a> strictly resolves to a boolean <code class="docutils literal"><span class="pre">true</span></code>:</p>
+<div class="highlight-python"><div class="highlight"><pre>casper.test.begin(&#39;assertEval() tests&#39;, 1, function(test) {
+    casper.start().then(function() {
+        this.setContent(&#39;&lt;div class=&quot;heaven&quot;&gt;beer&lt;/div&gt;&#39;);
+        test.assertEval(function() {
+            return __utils__.findOne(&#39;.heaven&#39;).textContent === &#39;beer&#39;;
+        });
+    }).run(function() {
+        test.done();
+    });
+});
+</pre></div>
+</div>
+</div>
+<div class="section" id="assertevalequals">
+<h3><code class="docutils literal"><span class="pre">assertEvalEquals()</span></code><a class="headerlink" href="#assertevalequals" title="Permalink to this headline">¶</a></h3>
+<p><strong>Signature:</strong> <code class="docutils literal"><span class="pre">assertEvalEquals(Function</span> <span class="pre">fn,</span> <span class="pre">mixed</span> <span class="pre">expected[,</span> <span class="pre">String</span> <span class="pre">message,</span> <span class="pre">Mixed</span> <span class="pre">arguments])</span></code></p>
+<p>Asserts that the result of a <a class="reference internal" href="casper.html#casper-evaluate"><span>code evaluation in remote DOM</span></a> strictly equals to the expected value:</p>
+<div class="highlight-python"><div class="highlight"><pre>casper.test.begin(&#39;assertEvalEquals() tests&#39;, 1, function(test) {
+    casper.start().then(function() {
+        this.setContent(&#39;&lt;div class=&quot;heaven&quot;&gt;beer&lt;/div&gt;&#39;);
+        test.assertEvalEquals(function() {
+            return __utils__.findOne(&#39;.heaven&#39;).textContent;
+        }, &#39;beer&#39;);
+    }).run(function() {
+        test.done();
+    });
+});
+</pre></div>
+</div>
+</div>
+<div class="section" id="assertelementcount">
+<span id="tester-assertelementcount"></span><h3><code class="docutils literal"><span class="pre">assertElementCount()</span></code><a class="headerlink" href="#assertelementcount" title="Permalink to this headline">¶</a></h3>
+<p><strong>Signature:</strong> <code class="docutils literal"><span class="pre">assertElementCount(String</span> <span class="pre">selector,</span> <span class="pre">Number</span> <span class="pre">count[,</span> <span class="pre">String</span> <span class="pre">message])</span></code></p>
+<p>Asserts that a <span class="xref std std-ref">selector expression</span> matches a given number of elements:</p>
+<div class="highlight-python"><div class="highlight"><pre>casper.test.begin(&#39;assertElementCount() tests&#39;, 3, function(test) {
+    casper.start().then(function() {
+        this.page.content = &#39;&lt;ul&gt;&lt;li&gt;1&lt;/li&gt;&lt;li&gt;2&lt;/li&gt;&lt;li&gt;3&lt;/li&gt;&lt;/ul&gt;&#39;;
+        test.assertElementCount(&#39;ul&#39;, 1);
+        test.assertElementCount(&#39;li&#39;, 3);
+        test.assertElementCount(&#39;address&#39;, 0);
+    }).run(function() {
+        test.done();
+    });
+});
+</pre></div>
+</div>
+</div>
+<div class="section" id="assertexists">
+<span id="index-3"></span><h3><code class="docutils literal"><span class="pre">assertExists()</span></code><a class="headerlink" href="#assertexists" title="Permalink to this headline">¶</a></h3>
+<p><strong>Signature:</strong> <code class="docutils literal"><span class="pre">assertExists(String</span> <span class="pre">selector[,</span> <span class="pre">String</span> <span class="pre">message])</span></code></p>
+<p>Asserts that an element matching the provided <span class="xref std std-ref">selector expression</span> exists in remote DOM environment:</p>
+<div class="highlight-python"><div class="highlight"><pre>casper.test.begin(&#39;assertExists() tests&#39;, 1, function(test) {
+    casper.start().then(function() {
+        this.setContent(&#39;&lt;div class=&quot;heaven&quot;&gt;beer&lt;/div&gt;&#39;);
+        test.assertExists(&#39;.heaven&#39;);
+    }).run(function() {
+        test.done();
+    });
+});
+</pre></div>
+</div>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#assertdoesntexist">assertDoesntExist()</a></p>
+</div>
+</div>
+<div class="section" id="assertfalsy">
+<span id="index-4"></span><h3><code class="docutils literal"><span class="pre">assertFalsy()</span></code><a class="headerlink" href="#assertfalsy" title="Permalink to this headline">¶</a></h3>
+<p><strong>Signature:</strong> <code class="docutils literal"><span class="pre">assertFalsy(Mixed</span> <span class="pre">subject[,</span> <span class="pre">String</span> <span class="pre">message])</span></code></p>
+<div class="versionadded">
+<p><span class="versionmodified">New in version 1.0.</span></p>
+</div>
+<p>Asserts that a given subject is <a class="reference external" href="http://11heavens.com/falsy-and-truthy-in-javascript">falsy</a>.</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#asserttruthy">assertTruthy()</a></p>
+</div>
+</div>
+<div class="section" id="assertfield">
+<span id="index-5"></span><h3><code class="docutils literal"><span class="pre">assertField()</span></code><a class="headerlink" href="#assertfield" title="Permalink to this headline">¶</a></h3>
+<p><strong>Signature:</strong> <code class="docutils literal"><span class="pre">assertField(String|Object</span> <span class="pre">input,</span> <span class="pre">String</span> <span class="pre">expected[,</span> <span class="pre">String</span> <span class="pre">message,</span> <span class="pre">Object</span> <span class="pre">options])</span></code></p>
+<p>Asserts that a given form field has the provided value with input name or <span class="xref std std-ref">selector expression</span>:</p>
+<div class="highlight-python"><div class="highlight"><pre>casper.test.begin(&#39;assertField() tests&#39;, 1, function(test) {
+    casper.start(&#39;http://www.google.fr/&#39;, function() {
+        this.fill(&#39;form[name=&quot;gs&quot;]&#39;, { q: &#39;plop&#39; }, false);
+        test.assertField(&#39;q&#39;, &#39;plop&#39;);
+    }).run(function() {
+        test.done();
+    });
+});
+
+// Path usage with type &#39;css&#39;
+casper.test.begin(&#39;assertField() tests&#39;, 1, function(test) {
+    casper.start(&#39;http://www.google.fr/&#39;, function() {
+        this.fill(&#39;form[name=&quot;gs&quot;]&#39;, { q: &#39;plop&#39; }, false);
+        test.assertField({type: &#39;css&#39;, path: &#39;.q.foo&#39;}, &#39;plop&#39;);
+    }).run(function() {
+        test.done();
+    });
+});
+</pre></div>
+</div>
+<div class="versionadded">
+<p><span class="versionmodified">New in version 1.0.</span></p>
+</div>
+<p>This also works with any input type: <code class="docutils literal"><span class="pre">select</span></code>, <code class="docutils literal"><span class="pre">textarea</span></code>, etc.</p>
+<div class="versionadded">
+<p><span class="versionmodified">New in version 1.1.</span></p>
+</div>
+<p>The <cite>options</cite> parameter allows to set the options to use with
+<a class="reference internal" href="clientutils.html#clientutils-getfieldvalue"><span>ClientUtils#getFieldValue()</span></a>.</p>
+<p><cite>input</cite> parameter introspects whether or not a <cite>type</cite> key is passed in with <cite>xpath</cite> or <cite>css</cite> and a property <cite>path</cite> specified along with it.</p>
+</div>
+<div class="section" id="assertfieldname">
+<h3><code class="docutils literal"><span class="pre">assertFieldName()</span></code><a class="headerlink" href="#assertfieldname" title="Permalink to this headline">¶</a></h3>
+<p><strong>Signature:</strong> <code class="docutils literal"><span class="pre">assertFieldName(String</span> <span class="pre">inputName,</span> <span class="pre">String</span> <span class="pre">expected[,</span> <span class="pre">String</span> <span class="pre">message,</span> <span class="pre">Object</span> <span class="pre">options])</span></code></p>
+<div class="versionadded">
+<p><span class="versionmodified">New in version 1.1-beta3.</span></p>
+</div>
+<p>Asserts that a given form field has the provided value:</p>
+<div class="highlight-python"><div class="highlight"><pre>casper.test.begin(&#39;assertField() tests&#39;, 1, function(test) {
+    casper.start(&#39;http://www.google.fr/&#39;, function() {
+        this.fill(&#39;form[name=&quot;gs&quot;]&#39;, { q: &#39;plop&#39; }, false);
+        test.assertField(&#39;q&#39;, &#39;plop&#39;, &#39;did not plop&#39;, {formSelector: &#39;plopper&#39;});
+    }).run(function() {
+        test.done();
+    });
+});
+</pre></div>
+</div>
+</div>
+<div class="section" id="assertfieldcss">
+<h3><code class="docutils literal"><span class="pre">assertFieldCSS()</span></code><a class="headerlink" href="#assertfieldcss" title="Permalink to this headline">¶</a></h3>
+<p><strong>Signature:</strong> <code class="docutils literal"><span class="pre">assertFieldCSS(String</span> <span class="pre">cssSelector,</span> <span class="pre">String</span> <span class="pre">expected,</span> <span class="pre">String</span> <span class="pre">message)</span></code></p>
+<div class="versionadded">
+<p><span class="versionmodified">New in version 1.1.</span></p>
+</div>
+<p>Asserts that a given form field has the provided value given a CSS selector:</p>
+<div class="highlight-python"><div class="highlight"><pre>casper.test.begin(&#39;assertField() tests&#39;, 1, function(test) {
+    casper.start(&#39;http://www.google.fr/&#39;, function() {
+        this.fill(&#39;form[name=&quot;gs&quot;]&#39;, { q: &#39;plop&#39; }, false);
+        test.assertField(&#39;q&#39;, &#39;plop&#39;, &#39;did not plop&#39;, &#39;input.plop&#39;);
+    }).run(function() {
+        test.done();
+    });
+});
+</pre></div>
+</div>
+</div>
+<div class="section" id="assertfieldxpath">
+<h3><code class="docutils literal"><span class="pre">assertFieldXPath()</span></code><a class="headerlink" href="#assertfieldxpath" title="Permalink to this headline">¶</a></h3>
+<p><strong>Signature:</strong> <code class="docutils literal"><span class="pre">assertFieldXPath(String</span> <span class="pre">xpathSelector,</span> <span class="pre">String</span> <span class="pre">expected,</span> <span class="pre">String</span> <span class="pre">message)</span></code></p>
+<div class="versionadded">
+<p><span class="versionmodified">New in version 1.1.</span></p>
+</div>
+<p>Asserts that a given form field has the provided value given a XPath selector:</p>
+<div class="highlight-python"><div class="highlight"><pre>casper.test.begin(&#39;assertField() tests&#39;, 1, function(test) {
+    casper.start(&#39;http://www.google.fr/&#39;, function() {
+        this.fill(&#39;form[name=&quot;gs&quot;]&#39;, { q: &#39;plop&#39; }, false);
+        test.assertField(&#39;q&#39;, &#39;plop&#39;, &#39;did not plop&#39;, &#39;/html/body/form[0]/input[1]&#39;);
+    }).run(function() {
+        test.done();
+    });
+});
+</pre></div>
+</div>
+</div>
+<div class="section" id="asserthttpstatus">
+<span id="index-6"></span><h3><code class="docutils literal"><span class="pre">assertHttpStatus()</span></code><a class="headerlink" href="#asserthttpstatus" title="Permalink to this headline">¶</a></h3>
+<p><strong>Signature:</strong> <code class="docutils literal"><span class="pre">assertHttpStatus(Number</span> <span class="pre">status[,</span> <span class="pre">String</span> <span class="pre">message])</span></code></p>
+<p>Asserts that current <a class="reference external" href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html">HTTP status code</a> is the same as the one passed as argument:</p>
+<div class="highlight-python"><div class="highlight"><pre>casper.test.begin(&#39;casperjs.org is up and running&#39;, 1, function(test) {
+    casper.start(&#39;http://casperjs.org/&#39;, function() {
+        test.assertHttpStatus(200);
+    }).run(function() {
+        test.done();
+    });
+});
+</pre></div>
+</div>
+</div>
+<div class="section" id="assertmatch">
+<h3><code class="docutils literal"><span class="pre">assertMatch()</span></code><a class="headerlink" href="#assertmatch" title="Permalink to this headline">¶</a></h3>
+<p><strong>Signature:</strong> <code class="docutils literal"><span class="pre">assertMatch(mixed</span> <span class="pre">subject,</span> <span class="pre">RegExp</span> <span class="pre">pattern[,</span> <span class="pre">String</span> <span class="pre">message])</span></code></p>
+<p>Asserts that a provided string matches a provided javascript <code class="docutils literal"><span class="pre">RegExp</span></code> pattern:</p>
+<div class="highlight-python"><div class="highlight"><pre>casper.test.assertMatch(&#39;Chuck Norris&#39;, /^chuck/i, &#39;Chuck Norris\&#39; first name is Chuck&#39;);
+</pre></div>
+</div>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<ul class="last simple">
+<li><a class="reference internal" href="#asserturlmatch">assertUrlMatch()</a></li>
+<li><a class="reference internal" href="#asserttitlematch">assertTitleMatch()</a></li>
+</ul>
+</div>
+</div>
+<div class="section" id="assertnot">
+<h3><code class="docutils literal"><span class="pre">assertNot()</span></code><a class="headerlink" href="#assertnot" title="Permalink to this headline">¶</a></h3>
+<p><strong>Signature:</strong> <code class="docutils literal"><span class="pre">assertNot(mixed</span> <span class="pre">subject[,</span> <span class="pre">String</span> <span class="pre">message])</span></code></p>
+<p>Asserts that the passed subject resolves to some <a class="reference external" href="http://11heavens.com/falsy-and-truthy-in-javascript">falsy value</a>:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">casper</span><span class="o">.</span><span class="n">test</span><span class="o">.</span><span class="n">assertNot</span><span class="p">(</span><span class="n">false</span><span class="p">,</span> <span class="s">&quot;Universe is still operational&quot;</span><span class="p">);</span>
+</pre></div>
+</div>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#assert">assert()</a></p>
+</div>
+</div>
+<div class="section" id="assertnotequals">
+<h3><code class="docutils literal"><span class="pre">assertNotEquals()</span></code><a class="headerlink" href="#assertnotequals" title="Permalink to this headline">¶</a></h3>
+<p><strong>Signature:</strong> <code class="docutils literal"><span class="pre">assertNotEquals(mixed</span> <span class="pre">testValue,</span> <span class="pre">mixed</span> <span class="pre">expected[,</span> <span class="pre">String</span> <span class="pre">message])</span></code></p>
+<div class="versionadded">
+<p><span class="versionmodified">New in version 0.6.7.</span></p>
+</div>
+<p>Asserts that two values are <strong>not</strong> strictly equals:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">casper</span><span class="o">.</span><span class="n">test</span><span class="o">.</span><span class="n">assertNotEquals</span><span class="p">(</span><span class="n">true</span><span class="p">,</span> <span class="s">&quot;true&quot;</span><span class="p">);</span>
+</pre></div>
+</div>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#assertequals">assertEquals()</a></p>
+</div>
+</div>
+<div class="section" id="assertnotvisible">
+<h3><code class="docutils literal"><span class="pre">assertNotVisible()</span></code><a class="headerlink" href="#assertnotvisible" title="Permalink to this headline">¶</a></h3>
+<p><strong>Signature:</strong> <code class="docutils literal"><span class="pre">assertNotVisible(String</span> <span class="pre">selector[,</span> <span class="pre">String</span> <span class="pre">message])</span></code></p>
+<p>Asserts that the element matching the provided <span class="xref std std-ref">selector expression</span> is not visible:</p>
+<div class="highlight-python"><div class="highlight"><pre>casper.test.begin(&#39;assertNotVisible() tests&#39;, 1, function(test) {
+    casper.start().then(function() {
+        this.setContent(&#39;&lt;div class=&quot;foo&quot; style=&quot;display:none&gt;boo&lt;/div&gt;&#39;);
+        test.assertNotVisible(&#39;.foo&#39;);
+    }).run(function() {
+        test.done();
+    });
+});
+</pre></div>
+</div>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#assertvisible">assertVisible()</a></p>
+</div>
+</div>
+<div class="section" id="assertraises">
+<span id="index-7"></span><h3><code class="docutils literal"><span class="pre">assertRaises()</span></code><a class="headerlink" href="#assertraises" title="Permalink to this headline">¶</a></h3>
+<p><strong>Signature:</strong> <code class="docutils literal"><span class="pre">assertRaises(Function</span> <span class="pre">fn,</span> <span class="pre">Array</span> <span class="pre">args[,</span> <span class="pre">String</span> <span class="pre">message])</span></code></p>
+<p>Asserts that the provided function called with the given parameters raises a javascript <code class="docutils literal"><span class="pre">Error</span></code>:</p>
+<div class="highlight-python"><div class="highlight"><pre>casper.test.assertRaises(function(throwIt) {
+    if (throwIt) {
+        throw new Error(&#39;thrown&#39;);
+    }
+}, [true], &#39;Error has been raised.&#39;);
+
+casper.test.assertRaises(function(throwIt) {
+    if (throwIt) {
+        throw new Error(&#39;thrown&#39;);
+    }
+}, [false], &#39;Error has been raised.&#39;); // fails
+</pre></div>
+</div>
+</div>
+<div class="section" id="assertselectordoesnthavetext">
+<h3><code class="docutils literal"><span class="pre">assertSelectorDoesntHaveText()</span></code><a class="headerlink" href="#assertselectordoesnthavetext" title="Permalink to this headline">¶</a></h3>
+<p><strong>Signature:</strong> <code class="docutils literal"><span class="pre">assertSelectorDoesntHaveText(String</span> <span class="pre">selector,</span> <span class="pre">String</span> <span class="pre">text[,</span> <span class="pre">String</span> <span class="pre">message])</span></code></p>
+<p>Asserts that given text does not exist in all the elements matching the provided <span class="xref std std-ref">selector expression</span>:</p>
+<div class="highlight-python"><div class="highlight"><pre>casper.test.begin(&#39;assertSelectorDoesntHaveText() tests&#39;, 1, function(test) {
+    casper.start(&#39;http://google.com/&#39;, function() {
+        test.assertSelectorDoesntHaveText(&#39;title&#39;, &#39;Yahoo!&#39;);
+    }).run(function() {
+        test.done();
+    });
+});
+</pre></div>
+</div>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#assertselectorhastext">assertSelectorHasText()</a></p>
+</div>
+</div>
+<div class="section" id="assertselectorhastext">
+<span id="index-8"></span><h3><code class="docutils literal"><span class="pre">assertSelectorHasText()</span></code><a class="headerlink" href="#assertselectorhastext" title="Permalink to this headline">¶</a></h3>
+<p><strong>Signature:</strong> <code class="docutils literal"><span class="pre">assertSelectorHasText(String</span> <span class="pre">selector,</span> <span class="pre">String</span> <span class="pre">text[,</span> <span class="pre">String</span> <span class="pre">message])</span></code></p>
+<p>Asserts that given text exists in elements matching the provided <span class="xref std std-ref">selector expression</span>:</p>
+<div class="highlight-python"><div class="highlight"><pre>casper.test.begin(&#39;assertSelectorHasText() tests&#39;, 1, function(test) {
+    casper.start(&#39;http://google.com/&#39;, function() {
+        test.assertSelectorHasText(&#39;title&#39;, &#39;Google&#39;);
+    }).run(function() {
+        test.done();
+    });
+});
+</pre></div>
+</div>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#assertselectordoesnthavetext">assertSelectorDoesntHaveText()</a></p>
+</div>
+</div>
+<div class="section" id="assertresourceexists">
+<span id="index-9"></span><h3><code class="docutils literal"><span class="pre">assertResourceExists()</span></code><a class="headerlink" href="#assertresourceexists" title="Permalink to this headline">¶</a></h3>
+<p><strong>Signature:</strong> <code class="docutils literal"><span class="pre">assertResourceExists(Function</span> <span class="pre">testFx[,</span> <span class="pre">String</span> <span class="pre">message])</span></code></p>
+<p>The <code class="docutils literal"><span class="pre">testFx</span></code> function is executed against all loaded assets and the test passes when at least one resource matches:</p>
+<div class="highlight-python"><div class="highlight"><pre>casper.test.begin(&#39;assertResourceExists() tests&#39;, 1, function(test) {
+    casper.start(&#39;http://www.google.fr/&#39;, function() {
+        test.assertResourceExists(function(resource) {
+            return resource.url.match(&#39;logo3w.png&#39;);
+        });
+    }).run(function() {
+        test.done();
+    });
+});
+</pre></div>
+</div>
+<p>Shorter:</p>
+<div class="highlight-python"><div class="highlight"><pre>casper.test.begin(&#39;assertResourceExists() tests&#39;, 1, function(test) {
+    casper.start(&#39;http://www.google.fr/&#39;, function() {
+        test.assertResourceExists(&#39;logo3w.png&#39;);
+    }).run(function() {
+        test.done();
+    });
+});
+</pre></div>
+</div>
+<div class="admonition hint">
+<p class="first admonition-title">Hint</p>
+<p class="last">Check the documentation for <a class="reference internal" href="casper.html#casper-resourceexists"><span>Casper.resourceExists()</span></a>.</p>
+</div>
+</div>
+<div class="section" id="asserttextexists">
+<h3><code class="docutils literal"><span class="pre">assertTextExists()</span></code><a class="headerlink" href="#asserttextexists" title="Permalink to this headline">¶</a></h3>
+<p><strong>Signature:</strong> <code class="docutils literal"><span class="pre">assertTextExists(String</span> <span class="pre">expected[,</span> <span class="pre">String</span> <span class="pre">message])</span></code></p>
+<p>Asserts that body <strong>plain text content</strong> contains the given string:</p>
+<div class="highlight-python"><div class="highlight"><pre>casper.test.begin(&#39;assertTextExists() tests&#39;, 1, function(test) {
+    casper.start(&#39;http://www.google.fr/&#39;, function() {
+        test.assertTextExists(&#39;google&#39;, &#39;page body contains &quot;google&quot;&#39;);
+    }).run(function() {
+        test.done();
+    });
+});
+</pre></div>
+</div>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#asserttextdoesntexist">assertTextDoesntExist()</a></p>
+</div>
+</div>
+<div class="section" id="asserttextdoesntexist">
+<h3><code class="docutils literal"><span class="pre">assertTextDoesntExist()</span></code><a class="headerlink" href="#asserttextdoesntexist" title="Permalink to this headline">¶</a></h3>
+<p><strong>Signature:</strong> <code class="docutils literal"><span class="pre">assertTextDoesntExist(String</span> <span class="pre">unexpected[,</span> <span class="pre">String</span> <span class="pre">message])</span></code></p>
+<div class="versionadded">
+<p><span class="versionmodified">New in version 1.0.</span></p>
+</div>
+<p>Asserts that body <strong>plain text content</strong> doesn&#8217;t contain the given string:</p>
+<div class="highlight-python"><div class="highlight"><pre>casper.test.begin(&#39;assertTextDoesntExist() tests&#39;, 1, function(test) {
+    casper.start(&#39;http://www.google.fr/&#39;, function() {
+        test.assertTextDoesntExist(&#39;bing&#39;, &#39;page body does not contain &quot;bing&quot;&#39;);
+    }).run(function() {
+        test.done();
+    });
+});
+</pre></div>
+</div>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#asserttextexists">assertTextExists()</a></p>
+</div>
+</div>
+<div class="section" id="asserttitle">
+<h3><code class="docutils literal"><span class="pre">assertTitle()</span></code><a class="headerlink" href="#asserttitle" title="Permalink to this headline">¶</a></h3>
+<p><strong>Signature:</strong> <code class="docutils literal"><span class="pre">assertTitle(String</span> <span class="pre">expected[,</span> <span class="pre">String</span> <span class="pre">message])</span></code></p>
+<p>Asserts that title of the remote page equals to the expected one:</p>
+<div class="highlight-python"><div class="highlight"><pre>casper.test.begin(&#39;assertTitle() tests&#39;, 1, function(test) {
+    casper.start(&#39;http://www.google.fr/&#39;, function() {
+        test.assertTitle(&#39;Google&#39;, &#39;google.fr has the correct title&#39;);
+    }).run(function() {
+        test.done();
+    });
+});
+</pre></div>
+</div>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#asserttitlematch">assertTitleMatch()</a></p>
+</div>
+</div>
+<div class="section" id="asserttitlematch">
+<h3><code class="docutils literal"><span class="pre">assertTitleMatch()</span></code><a class="headerlink" href="#asserttitlematch" title="Permalink to this headline">¶</a></h3>
+<p><strong>Signature:</strong> <code class="docutils literal"><span class="pre">assertTitleMatch(RegExp</span> <span class="pre">pattern[,</span> <span class="pre">String</span> <span class="pre">message])</span></code></p>
+<p>Asserts that title of the remote page matches the provided RegExp pattern:</p>
+<div class="highlight-python"><div class="highlight"><pre>casper.test.begin(&#39;assertTitleMatch() tests&#39;, 1, function(test) {
+    casper.start(&#39;http://www.google.fr/&#39;, function() {
+        test.assertTitleMatch(/Google/, &#39;google.fr has a quite predictable title&#39;);
+    }).run(function() {
+        test.done();
+    });
+});
+</pre></div>
+</div>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#asserttitle">assertTitle()</a></p>
+</div>
+</div>
+<div class="section" id="asserttruthy">
+<span id="index-10"></span><h3><code class="docutils literal"><span class="pre">assertTruthy()</span></code><a class="headerlink" href="#asserttruthy" title="Permalink to this headline">¶</a></h3>
+<p><strong>Signature:</strong> <code class="docutils literal"><span class="pre">assertTruthy(Mixed</span> <span class="pre">subject[,</span> <span class="pre">String</span> <span class="pre">message])</span></code></p>
+<div class="versionadded">
+<p><span class="versionmodified">New in version 1.0.</span></p>
+</div>
+<p>Asserts that a given subject is <a class="reference external" href="http://11heavens.com/falsy-and-truthy-in-javascript">truthy</a>.</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#assertfalsy">assertFalsy()</a></p>
+</div>
+</div>
+<div class="section" id="asserttype">
+<span id="index-11"></span><h3><code class="docutils literal"><span class="pre">assertType()</span></code><a class="headerlink" href="#asserttype" title="Permalink to this headline">¶</a></h3>
+<p><strong>Signature:</strong> <code class="docutils literal"><span class="pre">assertType(mixed</span> <span class="pre">input,</span> <span class="pre">String</span> <span class="pre">type[,</span> <span class="pre">String</span> <span class="pre">message])</span></code></p>
+<p>Asserts that the provided input is of the given type:</p>
+<div class="highlight-python"><div class="highlight"><pre>casper.test.begin(&#39;assertType() tests&#39;, 1, function suite(test) {
+    test.assertType(42, &quot;number&quot;, &quot;Okay, 42 is a number&quot;);
+    test.assertType([1, 2, 3], &quot;array&quot;, &quot;We can test for arrays too!&quot;);
+    test.done();
+});
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Type names are always expressed in lower case.</p>
+</div>
+</div>
+<div class="section" id="assertinstanceof">
+<span id="index-12"></span><h3><code class="docutils literal"><span class="pre">assertInstanceOf()</span></code><a class="headerlink" href="#assertinstanceof" title="Permalink to this headline">¶</a></h3>
+<p><strong>Signature:</strong> <code class="docutils literal"><span class="pre">assertInstanceOf(mixed</span> <span class="pre">input,</span> <span class="pre">Function</span> <span class="pre">constructor[,</span> <span class="pre">String</span> <span class="pre">message])</span></code></p>
+<div class="versionadded">
+<p><span class="versionmodified">New in version 1.1.</span></p>
+</div>
+<p>Asserts that the provided input is of the given constructor:</p>
+<div class="highlight-python"><div class="highlight"><pre>function Cow() {
+    this.moo = function moo() {
+        return &#39;moo!&#39;;
+    };
+}
+casper.test.begin(&#39;assertInstanceOf() tests&#39;, 2, function suite(test) {
+    var daisy = new Cow();
+    test.assertInstanceOf(daisy, Cow, &quot;Ok, daisy is a cow.&quot;);
+    test.assertInstanceOf([&quot;moo&quot;, &quot;boo&quot;], Array, &quot;We can test for arrays too!&quot;);
+    test.done();
+});
+</pre></div>
+</div>
+</div>
+<div class="section" id="asserturlmatch">
+<span id="index-13"></span><h3><code class="docutils literal"><span class="pre">assertUrlMatch()</span></code><a class="headerlink" href="#asserturlmatch" title="Permalink to this headline">¶</a></h3>
+<p><strong>Signature:</strong> <code class="docutils literal"><span class="pre">assertUrlMatch(Regexp</span> <span class="pre">pattern[,</span> <span class="pre">String</span> <span class="pre">message])</span></code></p>
+<p>Asserts that the current page url matches the provided RegExp pattern:</p>
+<div class="highlight-python"><div class="highlight"><pre>casper.test.begin(&#39;assertUrlMatch() tests&#39;, 1, function(test) {
+    casper.start(&#39;http://www.google.fr/&#39;, function() {
+        test.assertUrlMatch(/^http:\/\//, &#39;google.fr is served in http://&#39;);
+    }).run(function() {
+        test.done();
+    });
+});
+</pre></div>
+</div>
+</div>
+<div class="section" id="assertvisible">
+<span id="index-14"></span><h3><code class="docutils literal"><span class="pre">assertVisible()</span></code><a class="headerlink" href="#assertvisible" title="Permalink to this headline">¶</a></h3>
+<p><strong>Signature:</strong> <code class="docutils literal"><span class="pre">assertVisible(String</span> <span class="pre">selector[,</span> <span class="pre">String</span> <span class="pre">message])</span></code></p>
+<p>Asserts that the element matching the provided <span class="xref std std-ref">selector expression</span> is visible:</p>
+<div class="highlight-python"><div class="highlight"><pre>casper.test.begin(&#39;assertVisible() tests&#39;, 1, function(test) {
+    casper.start(&#39;http://www.google.fr/&#39;, function() {
+        test.assertVisible(&#39;h1&#39;);
+    }).run(function() {
+        test.done();
+    });
+});
+</pre></div>
+</div>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#assertnotvisible">assertNotVisible()</a></p>
+</div>
+<span class="target" id="tester-begin"></span></div>
+<div class="section" id="begin">
+<span id="index-15"></span><h3><code class="docutils literal"><span class="pre">begin()</span></code><a class="headerlink" href="#begin" title="Permalink to this headline">¶</a></h3>
+<p><strong>Signatures:</strong></p>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">begin(String</span> <span class="pre">description,</span> <span class="pre">Number</span> <span class="pre">planned,</span> <span class="pre">Function</span> <span class="pre">suite)</span></code></li>
+<li><code class="docutils literal"><span class="pre">begin(String</span> <span class="pre">description,</span> <span class="pre">Function</span> <span class="pre">suite)</span></code></li>
+<li><code class="docutils literal"><span class="pre">begin(String</span> <span class="pre">description,</span> <span class="pre">Number</span> <span class="pre">planned,</span> <span class="pre">Object</span> <span class="pre">config)</span></code></li>
+<li><code class="docutils literal"><span class="pre">begin(String</span> <span class="pre">description,</span> <span class="pre">Object</span> <span class="pre">config)</span></code></li>
+</ul>
+<div class="versionadded">
+<p><span class="versionmodified">New in version 1.1.</span></p>
+</div>
+<p>Starts a suite of <code class="docutils literal"><span class="pre">&lt;planned&gt;</span></code> tests (if defined). The <code class="docutils literal"><span class="pre">suite</span></code> callback will get the current <code class="docutils literal"><span class="pre">Tester</span></code> instance as its first argument:</p>
+<div class="highlight-python"><div class="highlight"><pre>function Cow() {
+    this.mowed = false;
+    this.moo = function moo() {
+        this.mowed = true; // mootable state: don&#39;t do that
+        return &#39;moo!&#39;;
+    };
+}
+
+// unit style synchronous test case
+casper.test.begin(&#39;Cow can moo&#39;, 2, function suite(test) {
+    var cow = new Cow();
+    test.assertEquals(cow.moo(), &#39;moo!&#39;);
+    test.assert(cow.mowed);
+    test.done();
+});
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The <code class="docutils literal"><span class="pre">planned</span></code> argument is especially useful in case a given test script is abruptly interrupted leaving you with no obvious way to know it and an erroneously successful status.</p>
+</div>
+<p>A more asynchronous example:</p>
+<div class="highlight-python"><div class="highlight"><pre>casper.test.begin(&#39;Casperjs.org is navigable&#39;, 2, function suite(test) {
+    casper.start(&#39;http://casperjs.org/&#39;, function() {
+        test.assertTitleMatches(/casperjs/i);
+        this.clickLabel(&#39;Testing&#39;);
+    });
+
+    casper.then(function() {
+        test.assertUrlMatches(/testing\.html$/);
+    });
+
+    casper.run(function() {
+        test.done();
+    });
+});
+</pre></div>
+</div>
+<div class="admonition important">
+<p class="first admonition-title">Important</p>
+<p class="last"><a class="reference internal" href="#done">done()</a> <strong>must</strong> be called in order to terminate the suite. This is specially important when doing asynchronous tests so ensure it&#8217;s called when everything has actually been performed.</p>
+</div>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#done">done()</a></p>
+</div>
+<p><code class="docutils literal"><span class="pre">Tester#begin()</span></code> also accepts a test configuration object, so you can add <code class="docutils literal"><span class="pre">setUp()</span></code> and <code class="docutils literal"><span class="pre">tearDown()</span></code> methods:</p>
+<div class="highlight-python"><div class="highlight"><pre>// cow-test.js
+casper.test.begin(&#39;Cow can moo&#39;, 2, {
+    setUp: function(test) {
+        this.cow = new Cow();
+    },
+
+    tearDown: function(test) {
+        this.cow.destroy();
+    },
+
+    test: function(test) {
+        test.assertEquals(this.cow.moo(), &#39;moo!&#39;);
+        test.assert(this.cow.mowed);
+        test.done();
+    }
+});
+</pre></div>
+</div>
+</div>
+<div class="section" id="colorize">
+<span id="index-16"></span><h3><code class="docutils literal"><span class="pre">colorize()</span></code><a class="headerlink" href="#colorize" title="Permalink to this headline">¶</a></h3>
+<p><strong>Signature:</strong> <code class="docutils literal"><span class="pre">colorize(String</span> <span class="pre">message,</span> <span class="pre">String</span> <span class="pre">style)</span></code></p>
+<p>Render a colorized output. Basically a proxy method for <code class="docutils literal"><span class="pre">Casper.Colorizer#colorize()</span></code>.</p>
+</div>
+<div class="section" id="comment">
+<h3><code class="docutils literal"><span class="pre">comment()</span></code><a class="headerlink" href="#comment" title="Permalink to this headline">¶</a></h3>
+<p><strong>Signature:</strong> <code class="docutils literal"><span class="pre">comment(String</span> <span class="pre">message)</span></code></p>
+<p>Writes a comment-style formatted message to stdout:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">casper</span><span class="o">.</span><span class="n">test</span><span class="o">.</span><span class="n">comment</span><span class="p">(</span><span class="s">&quot;Hi, I&#39;m a comment&quot;</span><span class="p">);</span>
+</pre></div>
+</div>
+<span class="target" id="tester-done"></span></div>
+<div class="section" id="done">
+<span id="index-17"></span><h3><code class="docutils literal"><span class="pre">done()</span></code><a class="headerlink" href="#done" title="Permalink to this headline">¶</a></h3>
+<p><strong>Signature:</strong> <code class="docutils literal"><span class="pre">done()</span></code></p>
+<div class="versionchanged">
+<p><span class="versionmodified">Changed in version 1.1: </span><code class="docutils literal"><span class="pre">planned</span></code> parameter is deprecated</p>
+</div>
+<p>Flag a test suite started with <a class="reference internal" href="#begin">begin()</a> as processed:</p>
+<div class="highlight-python"><div class="highlight"><pre>casper.test.begin(&#39;my test suite&#39;, 2, function(test) {
+    test.assert(true);
+    test.assertNot(false);
+    test.done();
+});
+</pre></div>
+</div>
+<p>More asynchronously:</p>
+<div class="highlight-python"><div class="highlight"><pre>casper.test.begin(&#39;Casperjs.org is navigable&#39;, 2, function suite(test) {
+    casper.start(&#39;http://casperjs.org/&#39;, function() {
+        test.assertTitleMatches(/casperjs/i);
+        this.clickLabel(&#39;Testing&#39;);
+    });
+
+    casper.then(function() {
+        test.assertUrlMatches(/testing\.html$/);
+    });
+
+    casper.run(function() {
+        test.done();
+    });
+});
+</pre></div>
+</div>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#begin">begin()</a></p>
+</div>
+</div>
+<div class="section" id="error">
+<h3><code class="docutils literal"><span class="pre">error()</span></code><a class="headerlink" href="#error" title="Permalink to this headline">¶</a></h3>
+<p><strong>Signature:</strong> <code class="docutils literal"><span class="pre">error(String</span> <span class="pre">message)</span></code></p>
+<p>Writes an error-style formatted message to stdout:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">casper</span><span class="o">.</span><span class="n">test</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s">&quot;Hi, I&#39;m an error&quot;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="fail">
+<span id="index-18"></span><h3><code class="docutils literal"><span class="pre">fail()</span></code><a class="headerlink" href="#fail" title="Permalink to this headline">¶</a></h3>
+<p><strong>Signature:</strong> <code class="docutils literal"><span class="pre">fail(String</span> <span class="pre">message</span> <span class="pre">[,</span> <span class="pre">Object</span> <span class="pre">option])</span></code></p>
+<p>Adds a failed test entry to the stack:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">casper</span><span class="o">.</span><span class="n">test</span><span class="o">.</span><span class="n">fail</span><span class="p">(</span><span class="s">&quot;Georges W. Bush&quot;</span><span class="p">);</span>
+<span class="n">casper</span><span class="o">.</span><span class="n">test</span><span class="o">.</span><span class="n">fail</span><span class="p">(</span><span class="s">&quot;Here goes a really long and expressive message&quot;</span><span class="p">,</span> <span class="p">{</span><span class="n">name</span><span class="p">:</span><span class="s">&#39;shortfacts&#39;</span><span class="p">});</span>
+</pre></div>
+</div>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#pass">pass()</a></p>
+</div>
+</div>
+<div class="section" id="formatmessage">
+<h3><code class="docutils literal"><span class="pre">formatMessage()</span></code><a class="headerlink" href="#formatmessage" title="Permalink to this headline">¶</a></h3>
+<p><strong>Signature:</strong> <code class="docutils literal"><span class="pre">formatMessage(String</span> <span class="pre">message,</span> <span class="pre">String</span> <span class="pre">style)</span></code></p>
+<p>Formats a message to highlight some parts of it. Only used internally by the tester.</p>
+</div>
+<div class="section" id="getfailures">
+<h3><code class="docutils literal"><span class="pre">getFailures()</span></code><a class="headerlink" href="#getfailures" title="Permalink to this headline">¶</a></h3>
+<p><strong>Signature:</strong> <code class="docutils literal"><span class="pre">getFailures()</span></code></p>
+<div class="versionadded">
+<p><span class="versionmodified">New in version 1.0.</span></p>
+</div>
+<div class="deprecated">
+<p><span class="versionmodified">Deprecated since version 1.1.</span></p>
+</div>
+<p>Retrieves failures for current test suite:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">casper</span><span class="o">.</span><span class="n">test</span><span class="o">.</span><span class="n">assertEquals</span><span class="p">(</span><span class="n">true</span><span class="p">,</span> <span class="n">false</span><span class="p">);</span>
+<span class="n">require</span><span class="p">(</span><span class="s">&#39;utils&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">casper</span><span class="o">.</span><span class="n">test</span><span class="o">.</span><span class="n">getFailures</span><span class="p">());</span>
+<span class="n">casper</span><span class="o">.</span><span class="n">test</span><span class="o">.</span><span class="n">done</span><span class="p">();</span>
+</pre></div>
+</div>
+<p>That will give something like this:</p>
+<div class="highlight-text"><div class="highlight"><pre>$ casperjs test test-getFailures.js
+Test file: test-getFailures.js
+FAIL Subject equals the expected value
+#    type: assertEquals
+#    subject: true
+#    expected: false
+{
+    &quot;length&quot;: 1,
+    &quot;cases&quot;: [
+        {
+            &quot;success&quot;: false,
+            &quot;type&quot;: &quot;assertEquals&quot;,
+            &quot;standard&quot;: &quot;Subject equals the expected value&quot;,
+            &quot;file&quot;: &quot;test-getFailures.js&quot;,
+            &quot;values&quot;: {
+                &quot;subject&quot;: true,
+                &quot;expected&quot;: false
+            }
+        }
+    ]
+}
+FAIL 1 tests executed, 0 passed, 1 failed.
+
+Details for the 1 failed test:
+
+In c.js:0
+   assertEquals: Subject equals the expected value
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p>In CasperJS 1.1, you can recorded test failures by listening to the tester <code class="docutils literal"><span class="pre">fail</span></code> event:</p>
+<div class="last highlight-python"><div class="highlight"><pre>var failures = [];
+
+casper.test.on(&quot;fail&quot;, function(failure) {
+  failures.push(failure);
+});
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="getpasses">
+<h3><code class="docutils literal"><span class="pre">getPasses()</span></code><a class="headerlink" href="#getpasses" title="Permalink to this headline">¶</a></h3>
+<p><strong>Signature:</strong> <code class="docutils literal"><span class="pre">getPasses()</span></code></p>
+<div class="versionadded">
+<p><span class="versionmodified">New in version 1.0.</span></p>
+</div>
+<div class="deprecated">
+<p><span class="versionmodified">Deprecated since version 1.1.</span></p>
+</div>
+<p>Retrieves a report for successful test cases in the current test suite:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">casper</span><span class="o">.</span><span class="n">test</span><span class="o">.</span><span class="n">assertEquals</span><span class="p">(</span><span class="n">true</span><span class="p">,</span> <span class="n">true</span><span class="p">);</span>
+<span class="n">require</span><span class="p">(</span><span class="s">&#39;utils&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">casper</span><span class="o">.</span><span class="n">test</span><span class="o">.</span><span class="n">getPasses</span><span class="p">());</span>
+<span class="n">casper</span><span class="o">.</span><span class="n">test</span><span class="o">.</span><span class="n">done</span><span class="p">();</span>
+</pre></div>
+</div>
+<p>That will give something like this:</p>
+<div class="highlight-python"><div class="highlight"><pre>$ casperjs test test-getPasses.js
+Test file: test-getPasses.js
+PASS Subject equals the expected value
+{
+    &quot;length&quot;: 1,
+    &quot;cases&quot;: [
+        {
+            &quot;success&quot;: true,
+            &quot;type&quot;: &quot;assertEquals&quot;,
+            &quot;standard&quot;: &quot;Subject equals the expected value&quot;,
+            &quot;file&quot;: &quot;test-getPasses.js&quot;,
+            &quot;values&quot;: {
+                &quot;subject&quot;: true,
+                &quot;expected&quot;: true
+            }
+        }
+    ]
+}
+PASS 1 tests executed, 1 passed, 0 failed.
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p>In CasperJS 1.1, you can recorded test successes by listening to the tester <code class="docutils literal"><span class="pre">success</span></code> event:</p>
+<div class="last highlight-python"><div class="highlight"><pre>var successes = [];
+
+casper.test.on(&quot;success&quot;, function(success) {
+  successes.push(success);
+});
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="info">
+<h3><code class="docutils literal"><span class="pre">info()</span></code><a class="headerlink" href="#info" title="Permalink to this headline">¶</a></h3>
+<p><strong>Signature:</strong> <code class="docutils literal"><span class="pre">info(String</span> <span class="pre">message)</span></code></p>
+<p>Writes an info-style formatted message to stdout:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">casper</span><span class="o">.</span><span class="n">test</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s">&quot;Hi, I&#39;m an informative message.&quot;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="pass">
+<span id="index-19"></span><h3><code class="docutils literal"><span class="pre">pass()</span></code><a class="headerlink" href="#pass" title="Permalink to this headline">¶</a></h3>
+<p><strong>Signature:</strong> <code class="docutils literal"><span class="pre">pass(String</span> <span class="pre">message)</span></code></p>
+<p>Adds a successful test entry to the stack:</p>
+<div class="highlight-python"><div class="highlight"><pre>casper.test.pass(&quot;Barrack Obama&quot;);
+</pre></div>
+</div>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#fail">fail()</a></p>
+</div>
+</div>
+<div class="section" id="renderresults">
+<h3><code class="docutils literal"><span class="pre">renderResults()</span></code><a class="headerlink" href="#renderresults" title="Permalink to this headline">¶</a></h3>
+<p><strong>Signature:</strong> <code class="docutils literal"><span class="pre">renderResults(Boolean</span> <span class="pre">exit,</span> <span class="pre">Number</span> <span class="pre">status,</span> <span class="pre">String</span> <span class="pre">save)</span></code></p>
+<p>Render test results, save results in an XUnit formatted file, and optionally exits phantomjs:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">casper</span><span class="o">.</span><span class="n">test</span><span class="o">.</span><span class="n">renderResults</span><span class="p">(</span><span class="n">true</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="s">&#39;test-results.xml&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">This method is not to be called when using the <code class="docutils literal"><span class="pre">casperjs</span> <span class="pre">test</span></code> command (see documentation for <code class="xref doc docutils literal"><span class="pre">testing</span></code>), where it&#8217;s done automatically for you.</p>
+</div>
+</div>
+<div class="section" id="setup">
+<h3><code class="docutils literal"><span class="pre">setUp()</span></code><a class="headerlink" href="#setup" title="Permalink to this headline">¶</a></h3>
+<p><strong>Signature:</strong> <code class="docutils literal"><span class="pre">setUp([Function</span> <span class="pre">fn])</span></code></p>
+<p>Defines a function which will be executed before every test defined using <a class="reference internal" href="#begin">begin()</a>:</p>
+<div class="highlight-python"><div class="highlight"><pre>casper.test.setUp(function() {
+    casper.start().userAgent(&#39;Mosaic 0.1&#39;);
+});
+</pre></div>
+</div>
+<p>To perform asynchronous operations, use the <code class="docutils literal"><span class="pre">done</span></code> argument:</p>
+<div class="highlight-python"><div class="highlight"><pre>casper.test.setUp(function(done) {
+    casper.start(&#39;http://foo&#39;).then(function() {
+        // ...
+    }).run(done);
+});
+</pre></div>
+</div>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">Don&#8217;t specify the <code class="docutils literal"><span class="pre">done</span></code> argument if you don&#8217;t intend to use the method asynchronously.</p>
+</div>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#teardown">tearDown()</a></p>
+</div>
+</div>
+<div class="section" id="skip">
+<h3><code class="docutils literal"><span class="pre">skip()</span></code><a class="headerlink" href="#skip" title="Permalink to this headline">¶</a></h3>
+<p><strong>Signature:</strong> <code class="docutils literal"><span class="pre">skip(Number</span> <span class="pre">nb,</span> <span class="pre">String</span> <span class="pre">message)</span></code></p>
+<p>Skips a given number of planned tests:</p>
+<div class="highlight-python"><div class="highlight"><pre>casper.test.begin(&#39;Skip tests&#39;, 4, function(test) {
+    test.assert(true, &#39;First test executed&#39;);
+    test.assert(true, &#39;Second test executed&#39;);
+    test.skip(2, &#39;Two tests skipped&#39;);
+    test.done();
+});
+</pre></div>
+</div>
+</div>
+<div class="section" id="teardown">
+<h3><code class="docutils literal"><span class="pre">tearDown()</span></code><a class="headerlink" href="#teardown" title="Permalink to this headline">¶</a></h3>
+<p><strong>Signature:</strong> <code class="docutils literal"><span class="pre">tearDown([Function</span> <span class="pre">fn])</span></code></p>
+<p>Defines a function which will be executed before after every test defined using <a class="reference internal" href="#begin">begin()</a>:</p>
+<div class="highlight-python"><div class="highlight"><pre>casper.test.tearDown(function() {
+    casper.echo(&#39;See ya&#39;);
+});
+</pre></div>
+</div>
+<p>To perform asynchronous operations, use the <code class="docutils literal"><span class="pre">done</span></code> argument:</p>
+<div class="highlight-python"><div class="highlight"><pre>casper.test.tearDown(function(done) {
+    casper.start(&#39;http://foo/goodbye&#39;).then(function() {
+        // ...
+    }).run(done);
+});
+</pre></div>
+</div>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">Don&#8217;t specify the <code class="docutils literal"><span class="pre">done</span></code> argument if you don&#8217;t intend to use the method asynchronously.</p>
+</div>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#setup">setUp()</a></p>
+</div>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Document Outline</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">The <code class="docutils literal"><span class="pre">tester</span></code> module</a><ul>
+<li><a class="reference internal" href="#the-tester-prototype">The <code class="docutils literal"><span class="pre">Tester</span></code> prototype</a><ul>
+<li><a class="reference internal" href="#assert"><code class="docutils literal"><span class="pre">assert()</span></code></a></li>
+<li><a class="reference internal" href="#assertdoesntexist"><code class="docutils literal"><span class="pre">assertDoesntExist()</span></code></a></li>
+<li><a class="reference internal" href="#assertequals"><code class="docutils literal"><span class="pre">assertEquals()</span></code></a></li>
+<li><a class="reference internal" href="#asserteval"><code class="docutils literal"><span class="pre">assertEval()</span></code></a></li>
+<li><a class="reference internal" href="#assertevalequals"><code class="docutils literal"><span class="pre">assertEvalEquals()</span></code></a></li>
+<li><a class="reference internal" href="#assertelementcount"><code class="docutils literal"><span class="pre">assertElementCount()</span></code></a></li>
+<li><a class="reference internal" href="#assertexists"><code class="docutils literal"><span class="pre">assertExists()</span></code></a></li>
+<li><a class="reference internal" href="#assertfalsy"><code class="docutils literal"><span class="pre">assertFalsy()</span></code></a></li>
+<li><a class="reference internal" href="#assertfield"><code class="docutils literal"><span class="pre">assertField()</span></code></a></li>
+<li><a class="reference internal" href="#assertfieldname"><code class="docutils literal"><span class="pre">assertFieldName()</span></code></a></li>
+<li><a class="reference internal" href="#assertfieldcss"><code class="docutils literal"><span class="pre">assertFieldCSS()</span></code></a></li>
+<li><a class="reference internal" href="#assertfieldxpath"><code class="docutils literal"><span class="pre">assertFieldXPath()</span></code></a></li>
+<li><a class="reference internal" href="#asserthttpstatus"><code class="docutils literal"><span class="pre">assertHttpStatus()</span></code></a></li>
+<li><a class="reference internal" href="#assertmatch"><code class="docutils literal"><span class="pre">assertMatch()</span></code></a></li>
+<li><a class="reference internal" href="#assertnot"><code class="docutils literal"><span class="pre">assertNot()</span></code></a></li>
+<li><a class="reference internal" href="#assertnotequals"><code class="docutils literal"><span class="pre">assertNotEquals()</span></code></a></li>
+<li><a class="reference internal" href="#assertnotvisible"><code class="docutils literal"><span class="pre">assertNotVisible()</span></code></a></li>
+<li><a class="reference internal" href="#assertraises"><code class="docutils literal"><span class="pre">assertRaises()</span></code></a></li>
+<li><a class="reference internal" href="#assertselectordoesnthavetext"><code class="docutils literal"><span class="pre">assertSelectorDoesntHaveText()</span></code></a></li>
+<li><a class="reference internal" href="#assertselectorhastext"><code class="docutils literal"><span class="pre">assertSelectorHasText()</span></code></a></li>
+<li><a class="reference internal" href="#assertresourceexists"><code class="docutils literal"><span class="pre">assertResourceExists()</span></code></a></li>
+<li><a class="reference internal" href="#asserttextexists"><code class="docutils literal"><span class="pre">assertTextExists()</span></code></a></li>
+<li><a class="reference internal" href="#asserttextdoesntexist"><code class="docutils literal"><span class="pre">assertTextDoesntExist()</span></code></a></li>
+<li><a class="reference internal" href="#asserttitle"><code class="docutils literal"><span class="pre">assertTitle()</span></code></a></li>
+<li><a class="reference internal" href="#asserttitlematch"><code class="docutils literal"><span class="pre">assertTitleMatch()</span></code></a></li>
+<li><a class="reference internal" href="#asserttruthy"><code class="docutils literal"><span class="pre">assertTruthy()</span></code></a></li>
+<li><a class="reference internal" href="#asserttype"><code class="docutils literal"><span class="pre">assertType()</span></code></a></li>
+<li><a class="reference internal" href="#assertinstanceof"><code class="docutils literal"><span class="pre">assertInstanceOf()</span></code></a></li>
+<li><a class="reference internal" href="#asserturlmatch"><code class="docutils literal"><span class="pre">assertUrlMatch()</span></code></a></li>
+<li><a class="reference internal" href="#assertvisible"><code class="docutils literal"><span class="pre">assertVisible()</span></code></a></li>
+<li><a class="reference internal" href="#begin"><code class="docutils literal"><span class="pre">begin()</span></code></a></li>
+<li><a class="reference internal" href="#colorize"><code class="docutils literal"><span class="pre">colorize()</span></code></a></li>
+<li><a class="reference internal" href="#comment"><code class="docutils literal"><span class="pre">comment()</span></code></a></li>
+<li><a class="reference internal" href="#done"><code class="docutils literal"><span class="pre">done()</span></code></a></li>
+<li><a class="reference internal" href="#error"><code class="docutils literal"><span class="pre">error()</span></code></a></li>
+<li><a class="reference internal" href="#fail"><code class="docutils literal"><span class="pre">fail()</span></code></a></li>
+<li><a class="reference internal" href="#formatmessage"><code class="docutils literal"><span class="pre">formatMessage()</span></code></a></li>
+<li><a class="reference internal" href="#getfailures"><code class="docutils literal"><span class="pre">getFailures()</span></code></a></li>
+<li><a class="reference internal" href="#getpasses"><code class="docutils literal"><span class="pre">getPasses()</span></code></a></li>
+<li><a class="reference internal" href="#info"><code class="docutils literal"><span class="pre">info()</span></code></a></li>
+<li><a class="reference internal" href="#pass"><code class="docutils literal"><span class="pre">pass()</span></code></a></li>
+<li><a class="reference internal" href="#renderresults"><code class="docutils literal"><span class="pre">renderResults()</span></code></a></li>
+<li><a class="reference internal" href="#setup"><code class="docutils literal"><span class="pre">setUp()</span></code></a></li>
+<li><a class="reference internal" href="#skip"><code class="docutils literal"><span class="pre">skip()</span></code></a></li>
+<li><a class="reference internal" href="#teardown"><code class="docutils literal"><span class="pre">tearDown()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+<h3><a href="../index.html">Table Of Contents</a></h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../01/$_convention.html">Words and Formats used in Proposal</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../00_dir/$_00-prologue.html">Prologue</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../01_dir/$_01-convention.html">Words and Formats used in Proposal</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../02_dir/$_02-core.html">Features - Core</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../03_dir/$_03-detail.html">Features - Core with Detail</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../04_dir/$_04-fda.html">Features - FDA Labeling Specifications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../06_dir/$_06-future.html">Features - Future</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../07_dir/$_07-glossary.html">Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../10_dir/$_10-term-project.html">Terms related to Project</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../11_dir/$_11-term-ontology.html">Terms imported from Ontologies</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../13_dir/$_13-bibliography.html">Bibliographies</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../15_dir/$_15-ontomatica.html">Ontomatica</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../12_dir/$_12-epilogue.html">Epilogue</a></li>
+</ul>
+<h3>Index</h3>
+<p><a href="../genindex.html">Thesaurus</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../_sources/modules/tester.txt"
+           rel="nofollow">Show Source</a></li>
+   
+  </ul>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="nav-item nav-item-0"><a href="../index.html">CasperJS  documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &copy; Copyright 2011-2015 Nicolas Perriault and contributors. CasperJS logo by Jeremy Forveille.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.1.
+    </div>
+  </body>
+</html>
