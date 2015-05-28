@@ -1,0 +1,354 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>OnLine and OnMessage Deposition &mdash; CasperJS  documentation</title>
+    
+    <link rel="stylesheet" href="../_static/basic.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/jsdemo.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/sphinxcontrib-images/LightBox2/lightbox2/css/lightbox.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/jsdemo.js"></script>
+    <script type="text/javascript" src="../_static/sphinxcontrib-images/LightBox2/lightbox2/js/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="../_static/sphinxcontrib-images/LightBox2/lightbox2/js/lightbox.min.js"></script>
+    <script type="text/javascript" src="../_static/sphinxcontrib-images/LightBox2/lightbox2-customize/jquery-noconflict.js"></script>
+    <link rel="shortcut icon" href="../_static/casperjs-favicon.ico"/>
+    <link rel="top" title="CasperJS  documentation" href="../index.html" />
+    <link rel="up" title="Data Depository" href="$_02-core-10-deposition.html" />
+    <link rel="next" title="OnLine Top Down Deposition" href="$_02-core-10-deposition-2-top-down.html" />
+    <link rel="prev" title="Data Depository" href="$_02-core-10-deposition.html" />
+    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Asap:400,700,400italic,700italic&amp;subset=latin,latin-ext">
+    <link rel="stylesheet" title="Dark theme" href="../_static/casperjs-dark.css">
+    <link rel="alternate stylesheet" title="Light theme" href="../_static/casperjs-light.css">
+    <script type="text/javascript" src="../_static/style-switcher.js"></script>
+
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="$_02-core-10-deposition-2-top-down.html" title="OnLine Top Down Deposition"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="$_02-core-10-deposition.html" title="Data Depository"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">CasperJS  documentation</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="$_02-core.html" >Features - Core</a> &raquo;</li>
+          <li class="nav-item nav-item-2"><a href="$_02-core-10-deposition.html" accesskey="U">Data Depository</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="online-and-onmessage-deposition">
+<span id="core-10-deposition-1-online-onmessage"></span><h1>OnLine and OnMessage Deposition<a class="headerlink" href="#online-and-onmessage-deposition" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="table-of-contents">
+<span id="return-to-top-02-core-10-deposition-1-online-onmessage"></span><h2>Table of Contents<a class="headerlink" href="#table-of-contents" title="Permalink to this headline">¶</a></h2>
+<div class="contents local topic" id="contents">
+<ul class="simple">
+<li><a class="reference internal" href="#deposition-workflow" id="id1">Deposition Workflow</a></li>
+<li><a class="reference internal" href="#harmonization-of-gs1-gtin-and-vocal-data" id="id2">Harmonization of GS1, GTIN and Vocal Data</a></li>
+<li><a class="reference internal" href="#integration-of-gs1-gtin-and-vocal-data" id="id3">Integration of GS1, GTIN and Vocal Data</a></li>
+</ul>
+</div>
+<div class="section" id="deposition-workflow">
+<h3><a class="toc-backref" href="#id1">Deposition Workflow</a><a class="headerlink" href="#deposition-workflow" title="Permalink to this headline">¶</a></h3>
+<p>A <a class="reference internal" href="../10_dir/$_10-term-project.html#terms-depositor"><span>depositor</span></a>  registers information via:</p>
+<ol class="arabic simple">
+<li><a class="reference internal" href="../10_dir/$_10-term-project.html#terms-online"><span>OnLine</span></a>  interface, or</li>
+<li><a class="reference internal" href="../10_dir/$_10-term-project.html#terms-onmessage"><span>OnMessage</span></a>  interface.</li>
+</ol>
+<p><a class="reference internal" href="../10_dir/$_10-term-project.html#terms-ontop"><span>OnTop</span></a>  parser interacts with <a class="reference internal" href="../10_dir/$_10-term-project.html#terms-ontology"><span>ontologies</span></a> to properly classify <a class="reference internal" href="../10_dir/$_10-term-project.html#terms-deposit"><span>deposit</span></a>.</p>
+<p><a class="reference internal" href="../10_dir/$_10-term-project.html#terms-usda-select"><span>USDA select</span></a>  and <a class="reference internal" href="../10_dir/$_10-term-project.html#terms-usda-prime"><span>USDA prime</span></a>  data are complemented with data generated by <a class="reference internal" href="../10_dir/$_10-term-project.html#terms-usda-mathematics"><span>USDA mathematics</span></a>.</p>
+<p>Ontomatica <a class="reference internal" href="../10_dir/$_10-term-project.html#terms-graph"><span>graphs</span></a>  (representing things or events, and causal relationships between them) are updated.</p>
+<p>Data then is stored on <a class="reference internal" href="../10_dir/$_10-term-project.html#terms-mysql"><span>MySQL</span></a>  and <a class="reference internal" href="../10_dir/$_10-term-project.html#terms-rest"><span>REST</span></a> servers.</p>
+<div class="figure align-center">
+<img alt="../_images/$_02-core-10-deposition-1-OnLine-OnMessage-1-process_.png" src="../_images/$_02-core-10-deposition-1-OnLine-OnMessage-1-process_.png" />
+</div>
+</div>
+<div class="section" id="harmonization-of-gs1-gtin-and-vocal-data">
+<h3><a class="toc-backref" href="#id2">Harmonization of GS1, GTIN and Vocal Data</a><a class="headerlink" href="#harmonization-of-gs1-gtin-and-vocal-data" title="Permalink to this headline">¶</a></h3>
+<p>Explanation; equivalence <code class="xref py py-class docutils literal"><span class="pre">schema:sameAs</span></code>.</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="43%" />
+<col width="57%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">GS1 GPC Classes and Bricks</th>
+<th class="head">Vocal facet term and facet term code</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><strong>Brick attribute: Classification</strong></td>
+<td><strong>Product Type</strong></td>
+</tr>
+<tr class="row-odd"><td>&#8211;</td>
+<td>[A0361]</td>
+</tr>
+<tr class="row-even"><td><em>Family: Fruits; Vegetables; Nuts; Seeds</em></td>
+<td><em>Fruits; Vegetables; Nuts; Seeds</em></td>
+</tr>
+<tr class="row-odd"><td>[50100000]</td>
+<td>[A0987]</td>
+</tr>
+<tr class="row-even"><td><em>Class: Fruit - Prepared; Processed</em></td>
+<td><em>Fruit - Prepared; Processed</em></td>
+</tr>
+<tr class="row-odd"><td>[50102000]</td>
+<td>[A0988]</td>
+</tr>
+<tr class="row-even"><td><em>Brick: Fruit - Prepared; Processed (Perishable)</em></td>
+<td><em>Fruit - Prepared; Processed (Perishable)</em></td>
+</tr>
+<tr class="row-odd"><td>[10000205]</td>
+<td>[A0990]</td>
+</tr>
+<tr class="row-even"><td>~~~</td>
+<td>~~~</td>
+</tr>
+<tr class="row-odd"><td><strong>Brick attribute: Formation</strong></td>
+<td><strong>Physical State, Shape or Form</strong></td>
+</tr>
+<tr class="row-even"><td>[20000352]</td>
+<td>[E0113]</td>
+</tr>
+<tr class="row-odd"><td><em>Chopped</em></td>
+<td><em>Divided into pieces</em></td>
+</tr>
+<tr class="row-even"><td>[30000653]</td>
+<td>[E0100]</td>
+</tr>
+<tr class="row-odd"><td><em>Halved</em></td>
+<td><em>Divided into halves</em></td>
+</tr>
+<tr class="row-even"><td>[30001224]</td>
+<td>[E0116]</td>
+</tr>
+<tr class="row-odd"><td><em>Homogenized</em></td>
+<td><em>Homogenized</em></td>
+</tr>
+<tr class="row-even"><td>[30001266]</td>
+<td>[H0306]</td>
+</tr>
+<tr class="row-odd"><td>~~~</td>
+<td>~~~</td>
+</tr>
+<tr class="row-even"><td><strong>Brick attribute: Organic claim</strong></td>
+<td><strong>Consumer Group, Dietary Use, Label Claim</strong></td>
+</tr>
+<tr class="row-odd"><td>[20000142]</td>
+<td>[P0023]</td>
+</tr>
+<tr class="row-even"><td>&#8211;</td>
+<td><em>Organic food claim or use</em></td>
+</tr>
+<tr class="row-odd"><td>&#8211;</td>
+<td>[P0128]</td>
+</tr>
+<tr class="row-even"><td><em>No</em></td>
+<td>&#8211;</td>
+</tr>
+<tr class="row-odd"><td>[30002960]</td>
+<td>&#8211;</td>
+</tr>
+<tr class="row-even"><td><em>Yes</em></td>
+<td>&#8211;</td>
+</tr>
+<tr class="row-odd"><td>[30002654]</td>
+<td>&#8211;</td>
+</tr>
+<tr class="row-even"><td>~~~</td>
+<td>~~~</td>
+</tr>
+<tr class="row-odd"><td><strong>Brick attribute: If pitted, stoned</strong></td>
+<td><strong>Part of Plant/Fruit</strong></td>
+</tr>
+<tr class="row-even"><td>[20000109]</td>
+<td>[C0167]</td>
+</tr>
+<tr class="row-odd"><td><em>No</em></td>
+<td><em>Fruit, peel undetermined, core, pit or seed present</em></td>
+</tr>
+<tr class="row-even"><td>[30002960]</td>
+<td>[C0163]</td>
+</tr>
+<tr class="row-odd"><td><em>Yes</em></td>
+<td><em>Fruit, peel undetermined, core, pit or seed removed</em></td>
+</tr>
+<tr class="row-even"><td>[30002654]</td>
+<td>[C0213]</td>
+</tr>
+<tr class="row-odd"><td>~~~</td>
+<td>~~~</td>
+</tr>
+<tr class="row-even"><td><strong>Brick attribute: Cooking process</strong></td>
+<td><strong>Preservation Method</strong></td>
+</tr>
+<tr class="row-odd"><td>[20000128]</td>
+<td>[J0107]</td>
+</tr>
+<tr class="row-even"><td><em>Cooked</em></td>
+<td><em>Sterilized by heat</em></td>
+</tr>
+<tr class="row-odd"><td>[30002953]</td>
+<td>[J0123]</td>
+</tr>
+<tr class="row-even"><td><em>Dried</em></td>
+<td><em>Dehydrated or dried</em></td>
+</tr>
+<tr class="row-odd"><td>[30002762]</td>
+<td>[J0116]</td>
+</tr>
+<tr class="row-even"><td><em>Sugared</em></td>
+<td><em>Preserved by adding sugar</em></td>
+</tr>
+<tr class="row-odd"><td>[30002518]</td>
+<td>[J0146]</td>
+</tr>
+<tr class="row-even"><td>~~~</td>
+<td>~~~</td>
+</tr>
+<tr class="row-odd"><td><strong>Brick attribute: Refrigeration claim</strong></td>
+<td><strong>Preservation Method</strong></td>
+</tr>
+<tr class="row-even"><td>[20000153]</td>
+<td>[J0107]</td>
+</tr>
+<tr class="row-odd"><td><em>Can be refrigerated</em></td>
+<td><em>Preserved by chilling</em></td>
+</tr>
+<tr class="row-even"><td>[30000517]</td>
+<td>[J0131]</td>
+</tr>
+<tr class="row-odd"><td><em>Must be refrigerated</em></td>
+<td>&#8211;</td>
+</tr>
+<tr class="row-even"><td>[30000090]</td>
+<td>&#8211;</td>
+</tr>
+<tr class="row-odd"><td>~~~</td>
+<td>~~~</td>
+</tr>
+<tr class="row-even"><td><strong>Brick attribute: Type of fruit</strong></td>
+<td><strong>Fruit Producing Plant</strong></td>
+</tr>
+<tr class="row-odd"><td>[20000076] 103 possible types of fruits</td>
+<td>[B1140]</td>
+</tr>
+<tr class="row-even"><td><em>Apples</em></td>
+<td><em>Apple</em></td>
+</tr>
+<tr class="row-odd"><td>[30003020]</td>
+<td>[B1245]</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="integration-of-gs1-gtin-and-vocal-data">
+<h3><a class="toc-backref" href="#id3">Integration of GS1, GTIN and Vocal Data</a><a class="headerlink" href="#integration-of-gs1-gtin-and-vocal-data" title="Permalink to this headline">¶</a></h3>
+<p>OnMessage enables construction of a comprehensive food record that includes bar code information (GTIN) together with GS1 data (Brick codes), Vocal terms and related data.</p>
+<div class="figure align-center">
+<img alt="../_images/$_02-core-10-deposition-1-OnLine-OnMessage-2-GTIN-Vocal_.png" src="../_images/$_02-core-10-deposition-1-OnLine-OnMessage-2-GTIN-Vocal_.png" />
+</div>
+<p><a class="reference internal" href="#return-to-top-02-core-10-deposition-1-online-onmessage"><span>Return to top</span></a></p>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Document Outline</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">OnLine and OnMessage Deposition</a><ul>
+<li><a class="reference internal" href="#table-of-contents">Table of Contents</a><ul>
+<li><a class="reference internal" href="#deposition-workflow">Deposition Workflow</a></li>
+<li><a class="reference internal" href="#harmonization-of-gs1-gtin-and-vocal-data">Harmonization of GS1, GTIN and Vocal Data</a></li>
+<li><a class="reference internal" href="#integration-of-gs1-gtin-and-vocal-data">Integration of GS1, GTIN and Vocal Data</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="$_02-core-10-deposition.html"
+                        title="previous chapter">Data Depository</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="$_02-core-10-deposition-2-top-down.html"
+                        title="next chapter">OnLine Top Down Deposition</a></p><h3>Index</h3>
+<p><a href="../genindex.html">Thesaurus</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../_sources/02_dir/$_02-core-10-deposition-1-OnLine-OnMessage.txt"
+           rel="nofollow">Show Source</a></li>
+   
+  </ul>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="$_02-core-10-deposition-2-top-down.html" title="OnLine Top Down Deposition"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="$_02-core-10-deposition.html" title="Data Depository"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">CasperJS  documentation</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="$_02-core.html" >Features - Core</a> &raquo;</li>
+          <li class="nav-item nav-item-2"><a href="$_02-core-10-deposition.html" >Data Depository</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &copy; Copyright 2011-2015 Nicolas Perriault and contributors. CasperJS logo by Jeremy Forveille.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.1.
+    </div>
+  </body>
+</html>

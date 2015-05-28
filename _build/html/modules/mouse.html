@@ -1,0 +1,248 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>The mouse module &mdash; CasperJS  documentation</title>
+    
+    <link rel="stylesheet" href="../_static/basic.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/jsdemo.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/sphinxcontrib-images/LightBox2/lightbox2/css/lightbox.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/jsdemo.js"></script>
+    <script type="text/javascript" src="../_static/sphinxcontrib-images/LightBox2/lightbox2/js/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="../_static/sphinxcontrib-images/LightBox2/lightbox2/js/lightbox.min.js"></script>
+    <script type="text/javascript" src="../_static/sphinxcontrib-images/LightBox2/lightbox2-customize/jquery-noconflict.js"></script>
+    <link rel="shortcut icon" href="../_static/casperjs-favicon.ico"/>
+    <link rel="top" title="CasperJS  documentation" href="../index.html" />
+    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Asap:400,700,400italic,700italic&amp;subset=latin,latin-ext">
+    <link rel="stylesheet" title="Dark theme" href="../_static/casperjs-dark.css">
+    <link rel="alternate stylesheet" title="Light theme" href="../_static/casperjs-light.css">
+    <script type="text/javascript" src="../_static/style-switcher.js"></script>
+
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="nav-item nav-item-0"><a href="../index.html">CasperJS  documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="the-mouse-module">
+<span id="mouse-module"></span><h1>The <code class="docutils literal"><span class="pre">mouse</span></code> module<a class="headerlink" href="#the-mouse-module" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="the-mouse-class">
+<span id="index-0"></span><h2>The <code class="docutils literal"><span class="pre">Mouse</span></code> class<a class="headerlink" href="#the-mouse-class" title="Permalink to this headline">¶</a></h2>
+<p>The <code class="docutils literal"><span class="pre">Mouse</span></code> class is an abstraction on top of various mouse operations like moving, clicking, double-clicking, rollovers, etc. It requires a <code class="docutils literal"><span class="pre">Casper</span></code> instance as a dependency for accessing the DOM. A mouse object can be created that way:</p>
+<div class="highlight-python"><div class="highlight"><pre>var casper = require(&quot;casper&quot;).create();
+var mouse = require(&quot;mouse&quot;).create(casper);
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p>A <code class="docutils literal"><span class="pre">casper</span></code> instance has a <code class="docutils literal"><span class="pre">mouse</span></code> property already defined, so you usually don&#8217;t have to create one by hand in your casper scripts:</p>
+<div class="last highlight-python"><div class="highlight"><pre>casper.then(function() {
+    this.mouse.click(400, 300); // clicks at coordinates x=400; y=300
+});
+</pre></div>
+</div>
+</div>
+<div class="section" id="click">
+<h3><code class="docutils literal"><span class="pre">click()</span></code><a class="headerlink" href="#click" title="Permalink to this headline">¶</a></h3>
+<p><strong>Signature:</strong></p>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">click(Number</span> <span class="pre">x,</span> <span class="pre">Number</span> <span class="pre">y)</span></code></li>
+<li><code class="docutils literal"><span class="pre">click(String</span> <span class="pre">selector)</span></code></li>
+</ul>
+<p>Performs a click on the first element found matching the provided <code class="xref doc docutils literal"><span class="pre">selector</span> <span class="pre">expression</span></code> or at given coordinates if two numbers are passed:</p>
+<div class="highlight-python"><div class="highlight"><pre>casper.then(function() {
+    this.mouse.click(&quot;#my-link&quot;); // clicks &lt;a id=&quot;my-link&quot;&gt;hey&lt;/a&gt;
+    this.mouse.click(400, 300);   // clicks at coordinates x=400; y=300
+});
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">You may want to directly use <a class="reference internal" href="casper.html#casper-click"><span>Casper#click</span></a> instead.</p>
+</div>
+</div>
+<div class="section" id="doubleclick">
+<h3><code class="docutils literal"><span class="pre">doubleclick()</span></code><a class="headerlink" href="#doubleclick" title="Permalink to this headline">¶</a></h3>
+<p><strong>Signature:</strong></p>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">doubleclick(Number</span> <span class="pre">x,</span> <span class="pre">Number</span> <span class="pre">y)</span></code></li>
+<li><code class="docutils literal"><span class="pre">doubleclick(String</span> <span class="pre">selector)</span></code></li>
+</ul>
+<p>Sends a <code class="docutils literal"><span class="pre">doubleclick</span></code> mouse event onto the element matching the provided arguments:</p>
+<div class="highlight-python"><div class="highlight"><pre>casper.then(function() {
+    this.mouse.doubleclick(&quot;#my-link&quot;); // doubleclicks &lt;a id=&quot;my-link&quot;&gt;hey&lt;/a&gt;
+    this.mouse.doubleclick(400, 300);   // doubleclicks at coordinates x=400; y=300
+});
+</pre></div>
+</div>
+</div>
+<div class="section" id="rightclick">
+<h3><code class="docutils literal"><span class="pre">rightclick()</span></code><a class="headerlink" href="#rightclick" title="Permalink to this headline">¶</a></h3>
+<p><strong>Signature:</strong></p>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">rightclick(Number</span> <span class="pre">x,</span> <span class="pre">Number</span> <span class="pre">y)</span></code></li>
+<li><code class="docutils literal"><span class="pre">rightclick(String</span> <span class="pre">selector)</span></code></li>
+</ul>
+<p>Sends a <code class="docutils literal"><span class="pre">contextmenu</span></code> mouse event onto the element matching the provided arguments:</p>
+<div class="highlight-python"><div class="highlight"><pre>casper.then(function() {
+    this.mouse.rightclick(&quot;#my-link&quot;); // doubleclicks &lt;a id=&quot;my-link&quot;&gt;hey&lt;/a&gt;
+    this.mouse.rightclick(400, 300);   // doubleclicks at coordinates x=400; y=300
+});
+</pre></div>
+</div>
+</div>
+<div class="section" id="down">
+<h3><code class="docutils literal"><span class="pre">down()</span></code><a class="headerlink" href="#down" title="Permalink to this headline">¶</a></h3>
+<p><strong>Signature:</strong></p>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">down(Number</span> <span class="pre">x,</span> <span class="pre">Number</span> <span class="pre">y)</span></code></li>
+<li><code class="docutils literal"><span class="pre">down(String</span> <span class="pre">selector)</span></code></li>
+</ul>
+<p>Sends a <code class="docutils literal"><span class="pre">mousedown</span></code> mouse event onto the element matching the provided arguments:</p>
+<div class="highlight-python"><div class="highlight"><pre>casper.then(function() {
+    this.mouse.down(&quot;#my-link&quot;); // press left button down &lt;a id=&quot;my-link&quot;&gt;hey&lt;/a&gt;
+    this.mouse.down(400, 300);   // press left button down at coordinates x=400; y=300
+});
+</pre></div>
+</div>
+</div>
+<div class="section" id="move">
+<h3><code class="docutils literal"><span class="pre">move()</span></code><a class="headerlink" href="#move" title="Permalink to this headline">¶</a></h3>
+<p><strong>Signature:</strong></p>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">move(Number</span> <span class="pre">x,</span> <span class="pre">Number</span> <span class="pre">y)</span></code></li>
+<li><code class="docutils literal"><span class="pre">move(String</span> <span class="pre">selector)</span></code></li>
+</ul>
+<p>Moves the mouse cursor onto the element matching the provided arguments:</p>
+<div class="highlight-python"><div class="highlight"><pre>casper.then(function() {
+    this.mouse.move(&quot;#my-link&quot;); // moves cursor over &lt;a id=&quot;my-link&quot;&gt;hey&lt;/a&gt;
+    this.mouse.move(400, 300);   // moves cursor over coordinates x=400; y=300
+});
+</pre></div>
+</div>
+</div>
+<div class="section" id="up">
+<h3><code class="docutils literal"><span class="pre">up()</span></code><a class="headerlink" href="#up" title="Permalink to this headline">¶</a></h3>
+<p><strong>Signature:</strong></p>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">up(Number</span> <span class="pre">x,</span> <span class="pre">Number</span> <span class="pre">y)</span></code></li>
+<li><code class="docutils literal"><span class="pre">up(String</span> <span class="pre">selector)</span></code></li>
+</ul>
+<p>Sends a <code class="docutils literal"><span class="pre">mouseup</span></code> mouse event onto the element matching the provided arguments:</p>
+<div class="highlight-python"><div class="highlight"><pre>casper.then(function() {
+    this.mouse.up(&quot;#my-link&quot;); // release left button over &lt;a id=&quot;my-link&quot;&gt;hey&lt;/a&gt;
+    this.mouse.up(400, 300);   // release left button over coordinates x=400; y=300
+});
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Document Outline</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">The <code class="docutils literal"><span class="pre">mouse</span></code> module</a><ul>
+<li><a class="reference internal" href="#the-mouse-class">The <code class="docutils literal"><span class="pre">Mouse</span></code> class</a><ul>
+<li><a class="reference internal" href="#click"><code class="docutils literal"><span class="pre">click()</span></code></a></li>
+<li><a class="reference internal" href="#doubleclick"><code class="docutils literal"><span class="pre">doubleclick()</span></code></a></li>
+<li><a class="reference internal" href="#rightclick"><code class="docutils literal"><span class="pre">rightclick()</span></code></a></li>
+<li><a class="reference internal" href="#down"><code class="docutils literal"><span class="pre">down()</span></code></a></li>
+<li><a class="reference internal" href="#move"><code class="docutils literal"><span class="pre">move()</span></code></a></li>
+<li><a class="reference internal" href="#up"><code class="docutils literal"><span class="pre">up()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+<h3><a href="../index.html">Table Of Contents</a></h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../01/$_convention.html">Words and Formats used in Proposal</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../00_dir/$_00-prologue.html">Prologue</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../01_dir/$_01-convention.html">Words and Formats used in Proposal</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../02_dir/$_02-core.html">Features - Core</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../03_dir/$_03-detail.html">Features - Core with Detail</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../04_dir/$_04-fda.html">Features - FDA Labeling Specifications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../06_dir/$_06-future.html">Features - Future</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../07_dir/$_07-glossary.html">Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../10_dir/$_10-term-project.html">Terms related to Project</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../11_dir/$_11-term-ontology.html">Terms imported from Ontologies</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../13_dir/$_13-bibliography.html">Bibliographies</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../15_dir/$_15-ontomatica.html">Ontomatica</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../12_dir/$_12-epilogue.html">Epilogue</a></li>
+</ul>
+<h3>Index</h3>
+<p><a href="../genindex.html">Thesaurus</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../_sources/modules/mouse.txt"
+           rel="nofollow">Show Source</a></li>
+   
+  </ul>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="nav-item nav-item-0"><a href="../index.html">CasperJS  documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &copy; Copyright 2011-2015 Nicolas Perriault and contributors. CasperJS logo by Jeremy Forveille.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.1.
+    </div>
+  </body>
+</html>

@@ -1,0 +1,331 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Data Integration &mdash; CasperJS  documentation</title>
+    
+    <link rel="stylesheet" href="../_static/basic.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/jsdemo.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/sphinxcontrib-images/LightBox2/lightbox2/css/lightbox.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/jsdemo.js"></script>
+    <script type="text/javascript" src="../_static/sphinxcontrib-images/LightBox2/lightbox2/js/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="../_static/sphinxcontrib-images/LightBox2/lightbox2/js/lightbox.min.js"></script>
+    <script type="text/javascript" src="../_static/sphinxcontrib-images/LightBox2/lightbox2-customize/jquery-noconflict.js"></script>
+    <link rel="shortcut icon" href="../_static/casperjs-favicon.ico"/>
+    <link rel="top" title="CasperJS  documentation" href="../index.html" />
+    <link rel="up" title="Features - Core" href="$_02-core.html" />
+    <link rel="next" title="USDA Stakeholder Requirements" href="$_02-core-16-stakeholders.html" />
+    <link rel="prev" title="Information Harmonization" href="$_02-core-14-harmonization.html" />
+    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Asap:400,700,400italic,700italic&amp;subset=latin,latin-ext">
+    <link rel="stylesheet" title="Dark theme" href="../_static/casperjs-dark.css">
+    <link rel="alternate stylesheet" title="Light theme" href="../_static/casperjs-light.css">
+    <script type="text/javascript" src="../_static/style-switcher.js"></script>
+
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="$_02-core-16-stakeholders.html" title="USDA Stakeholder Requirements"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="$_02-core-14-harmonization.html" title="Information Harmonization"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">CasperJS  documentation</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="$_02-core.html" accesskey="U">Features - Core</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="data-integration">
+<span id="core-15-integration"></span><h1>Data Integration<a class="headerlink" href="#data-integration" title="Permalink to this headline">¶</a></h1>
+<p id="return-to-top-02-core-15-integration">This section addresses:</p>
+<dl class="role">
+<dt id="role-USDA #4">
+<code class="descname">:USDA #4:</code><a class="headerlink" href="#role-USDA #4" title="Permalink to this definition">¶</a></dt>
+<dd><p>Allow incorporation ARS ontology for ingredients nomenclature with access to external databases.</p>
+</dd></dl>
+
+<dl class="role">
+<dt id="role-USDA #3">
+<code class="descname">:USDA #3:</code><a class="headerlink" href="#role-USDA #3" title="Permalink to this definition">¶</a></dt>
+<dd><p>Provide links to other nutrition-related databases.</p>
+</dd></dl>
+
+<div class="section" id="ontomatica-coverage">
+<h2>Ontomatica Coverage<a class="headerlink" href="#ontomatica-coverage" title="Permalink to this headline">¶</a></h2>
+<p>Ontomatica integrates data from projects sponsored by the following <a class="reference internal" href="../10_dir/$_10-term-project.html#terms-authority"><span>authorities</span></a>.</p>
+<p>Integration enables Ontomatica to automate the specification of a food description using authority terms familiar to a <a class="reference internal" href="../10_dir/$_10-term-project.html#terms-depositor"><span>depositor</span></a>.</p>
+<p>An authority can easily verify that <a class="reference internal" href="../10_dir/$_10-term-project.html#terms-component"><span>components</span></a>  of a food description accurately represent their data.</p>
+<p>Ontomatica has developed <a class="reference internal" href="../10_dir/$_10-term-project.html#terms-web-service"><span>web services</span></a> that keep integrated data fresh and accurate.</p>
+</div>
+<div class="section" id="authorities">
+<h2>Authorities<a class="headerlink" href="#authorities" title="Permalink to this headline">¶</a></h2>
+<table border="1" class="docutils">
+<colgroup>
+<col width="25%" />
+<col width="58%" />
+<col width="17%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Authority</th>
+<th class="head">Project</th>
+<th class="head">Data</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>US NIH</td>
+<td>PubChem</td>
+<td>Chemicals</td>
+</tr>
+<tr class="row-odd"><td>&nbsp;</td>
+<td>NCI thesaurus</td>
+<td>Food related terms</td>
+</tr>
+<tr class="row-even"><td>&nbsp;</td>
+<td>NCBI Taxon</td>
+<td>Living organisms</td>
+</tr>
+<tr class="row-odd"><td>&nbsp;</td>
+<td>NCBI Structure</td>
+<td>Proteins</td>
+</tr>
+<tr class="row-even"><td>&nbsp;</td>
+<td>NCBI Genes</td>
+<td>Human genome</td>
+</tr>
+<tr class="row-odd"><td>&nbsp;</td>
+<td>NCI Applied Research</td>
+<td>Diet components</td>
+</tr>
+<tr class="row-even"><td>US CDC</td>
+<td>What We Eat in America</td>
+<td>Meal groups</td>
+</tr>
+<tr class="row-odd"><td>&nbsp;</td>
+<td>What We Eat in America</td>
+<td>Food groups</td>
+</tr>
+<tr class="row-even"><td>USDA ARS</td>
+<td>IR-4</td>
+<td>Crop groups</td>
+</tr>
+<tr class="row-odd"><td>&nbsp;</td>
+<td>GRIN</td>
+<td>Living organisms</td>
+</tr>
+<tr class="row-even"><td>&nbsp;</td>
+<td>NALT</td>
+<td>Food related terms</td>
+</tr>
+<tr class="row-odd"><td>&nbsp;</td>
+<td>SR</td>
+<td>Food composition</td>
+</tr>
+<tr class="row-even"><td>&nbsp;</td>
+<td>FNDDS</td>
+<td>Meal composition</td>
+</tr>
+<tr class="row-odd"><td>&nbsp;</td>
+<td>GrainGenes</td>
+<td>Crop characteristics</td>
+</tr>
+<tr class="row-even"><td>USDA AMS</td>
+<td>IR-4</td>
+<td>Crop groups</td>
+</tr>
+<tr class="row-odd"><td>&nbsp;</td>
+<td>Organic specifications</td>
+<td>Label claims</td>
+</tr>
+<tr class="row-even"><td>&nbsp;</td>
+<td>Quality &amp; grades</td>
+<td>Label claims</td>
+</tr>
+<tr class="row-odd"><td>USDA FSIS</td>
+<td>Species</td>
+<td>Label claims</td>
+</tr>
+<tr class="row-even"><td>&nbsp;</td>
+<td>Parts of species</td>
+<td>Label claims</td>
+</tr>
+<tr class="row-odd"><td>&nbsp;</td>
+<td>Quality &amp; Grades; parts of species</td>
+<td>Label claims</td>
+</tr>
+<tr class="row-even"><td>&nbsp;</td>
+<td>Hazard analysis critical control points</td>
+<td>HACCP label claims</td>
+</tr>
+<tr class="row-odd"><td>US FDA</td>
+<td>Food labeling</td>
+<td>Label data &amp; label claims</td>
+</tr>
+<tr class="row-even"><td>&nbsp;</td>
+<td>Substance Registration System</td>
+<td>UNII</td>
+</tr>
+<tr class="row-odd"><td>&nbsp;</td>
+<td>US CFR &amp; ChemIDplus</td>
+<td>CAS identifiers &amp; UNII</td>
+</tr>
+<tr class="row-even"><td>US EPA</td>
+<td>Food Commodity Intake Data</td>
+<td>FCID identity</td>
+</tr>
+<tr class="row-odd"><td>&nbsp;</td>
+<td>IR-4</td>
+<td>Crop groups</td>
+</tr>
+<tr class="row-even"><td>US DOC</td>
+<td>North America Industrial Classification</td>
+<td>NAICS codes</td>
+</tr>
+<tr class="row-odd"><td>US ITC</td>
+<td>Harmonized Tariff &amp; Trade</td>
+<td>Tariff codes</td>
+</tr>
+<tr class="row-even"><td>European Union</td>
+<td>Food &amp; environment regulations</td>
+<td>EU legislation codes</td>
+</tr>
+<tr class="row-odd"><td>UN FAO</td>
+<td>CODEX crops</td>
+<td>Identity of commodities</td>
+</tr>
+<tr class="row-even"><td>&nbsp;</td>
+<td>INFOODS</td>
+<td>Identity of chemicals &amp; methods</td>
+</tr>
+<tr class="row-odd"><td>&nbsp;</td>
+<td>AgroVoc</td>
+<td>Identity of chemicals &amp; commodities</td>
+</tr>
+<tr class="row-even"><td>&nbsp;</td>
+<td>Agrontology</td>
+<td>Relationships among food-related items</td>
+</tr>
+<tr class="row-odd"><td>&nbsp;</td>
+<td>CODEX</td>
+<td>Identity of food additives</td>
+</tr>
+<tr class="row-even"><td>ChEBI</td>
+<td>chemicals</td>
+<td>Identity</td>
+</tr>
+<tr class="row-odd"><td>ChEMBL</td>
+<td>bioactive components</td>
+<td>Identity</td>
+</tr>
+<tr class="row-even"><td>UniProt</td>
+<td>bioactive components</td>
+<td>Identity</td>
+</tr>
+<tr class="row-odd"><td>KEGG</td>
+<td>chemicals</td>
+<td>Identity</td>
+</tr>
+<tr class="row-even"><td>&nbsp;</td>
+<td>bioactive components</td>
+<td>Identity</td>
+</tr>
+</tbody>
+</table>
+<p><a class="reference internal" href="#return-to-top-02-core-15-integration"><span>Return to top</span></a></p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Document Outline</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Data Integration</a><ul>
+<li><a class="reference internal" href="#ontomatica-coverage">Ontomatica Coverage</a></li>
+<li><a class="reference internal" href="#authorities">Authorities</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="$_02-core-14-harmonization.html"
+                        title="previous chapter">Information Harmonization</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="$_02-core-16-stakeholders.html"
+                        title="next chapter">USDA Stakeholder Requirements</a></p><h3>Index</h3>
+<p><a href="../genindex.html">Thesaurus</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../_sources/02_dir/$_02-core-15-integration.txt"
+           rel="nofollow">Show Source</a></li>
+   
+  </ul>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="$_02-core-16-stakeholders.html" title="USDA Stakeholder Requirements"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="$_02-core-14-harmonization.html" title="Information Harmonization"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">CasperJS  documentation</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="$_02-core.html" >Features - Core</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &copy; Copyright 2011-2015 Nicolas Perriault and contributors. CasperJS logo by Jeremy Forveille.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.1.
+    </div>
+  </body>
+</html>

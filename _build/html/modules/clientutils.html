@@ -1,0 +1,452 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>The clientutils module &mdash; CasperJS  documentation</title>
+    
+    <link rel="stylesheet" href="../_static/basic.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/jsdemo.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/sphinxcontrib-images/LightBox2/lightbox2/css/lightbox.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/jsdemo.js"></script>
+    <script type="text/javascript" src="../_static/sphinxcontrib-images/LightBox2/lightbox2/js/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="../_static/sphinxcontrib-images/LightBox2/lightbox2/js/lightbox.min.js"></script>
+    <script type="text/javascript" src="../_static/sphinxcontrib-images/LightBox2/lightbox2-customize/jquery-noconflict.js"></script>
+    <link rel="shortcut icon" href="../_static/casperjs-favicon.ico"/>
+    <link rel="top" title="CasperJS  documentation" href="../index.html" />
+    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Asap:400,700,400italic,700italic&amp;subset=latin,latin-ext">
+    <link rel="stylesheet" title="Dark theme" href="../_static/casperjs-dark.css">
+    <link rel="alternate stylesheet" title="Light theme" href="../_static/casperjs-light.css">
+    <script type="text/javascript" src="../_static/style-switcher.js"></script>
+
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="nav-item nav-item-0"><a href="../index.html">CasperJS  documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <span class="target" id="clientutils-module"></span><div class="section" id="the-clientutils-module">
+<span id="index-0"></span><h1>The <code class="docutils literal"><span class="pre">clientutils</span></code> module<a class="headerlink" href="#the-clientutils-module" title="Permalink to this headline">¶</a></h1>
+<p>Casper ships with a few client-side utilities which are injected in the remote DOM environment, and accessible from there through the <code class="docutils literal"><span class="pre">__utils__</span></code> object instance of the <code class="docutils literal"><span class="pre">ClientUtils</span></code> class from the <code class="docutils literal"><span class="pre">clientutils</span></code> module:</p>
+<div class="highlight-python"><div class="highlight"><pre>casper.evaluate(function() {
+  __utils__.echo(&quot;Hello World!&quot;);
+});
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">These tools are provided to avoid coupling CasperJS to any third-party library like <span class="target" id="index-1"></span>jQuery, Mootools or something; but you can always include these and have them available client-side using the <a class="reference internal" href="casper.html#casper-option-clientscripts"><span>Casper.options.clientScripts</span></a> option.</p>
+</div>
+<span class="target" id="bookmarklet"></span><div class="section" id="index-2">
+<span id="id1"></span><h2>Bookmarklet<a class="headerlink" href="#index-2" title="Permalink to this headline">¶</a></h2>
+<p>A bookmarklet is also available to help injecting Casper&#8217;s client-side utilities in the DOM of your favorite browser.</p>
+<p>Just drag the following link onto your favorites toobar; when clicking it, a <code class="docutils literal"><span class="pre">__utils__</span></code> object will be available within the console of your browser:</p>
+<div class="bookmarklet">
+    <a href="javascript:(function(){void(function(){if(!document.getElementById('CasperUtils')){var%20CasperUtils=document.createElement('script');CasperUtils.id='CasperUtils';CasperUtils.src='https://rawgit.com/n1k0/casperjs/master/modules/clientutils.js';document.documentElement.appendChild(CasperUtils);var%20interval=setInterval(function(){if(typeof%20ClientUtils==='function'){window.__utils__=new%20window.ClientUtils();clearInterval(interval);}},50);}}());})();">CasperJS Utils</a>
+</div><div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">CasperJS and PhantomJS being based on <a class="reference external" href="http://webkit.org/">Webkit</a>, you&#8217;re strongly encouraged to use a recent Webkit compatible browser to use this bookmarklet (Chrome, Safari, etc…)</p>
+</div>
+</div>
+<div class="section" id="clientutils-prototype">
+<span id="id2"></span><h2><code class="docutils literal"><span class="pre">ClientUtils</span></code> prototype<a class="headerlink" href="#clientutils-prototype" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="echo">
+<span id="index-3"></span><h3><code class="docutils literal"><span class="pre">echo()</span></code><a class="headerlink" href="#echo" title="Permalink to this headline">¶</a></h3>
+<p><strong>Signature:</strong> <code class="docutils literal"><span class="pre">echo(String</span> <span class="pre">message)</span></code></p>
+<div class="versionadded">
+<p><span class="versionmodified">New in version 1.0.</span></p>
+</div>
+<p>Print a message out to the casper console from the remote page DOM environment:</p>
+<div class="highlight-python"><div class="highlight"><pre>casper.start(&#39;http://foo.ner/&#39;).thenEvaluate(function() {
+    __utils__.echo(&#39;plop&#39;); // this will be printed to your shell at runtime
+});
+</pre></div>
+</div>
+</div>
+<div class="section" id="encode">
+<span id="index-4"></span><h3><code class="docutils literal"><span class="pre">encode()</span></code><a class="headerlink" href="#encode" title="Permalink to this headline">¶</a></h3>
+<p><strong>Signature:</strong> <code class="docutils literal"><span class="pre">encode(String</span> <span class="pre">contents)</span></code></p>
+<p>Encodes a string using the <a class="reference external" href="http://en.wikipedia.org/wiki/Base64">base64 algorithm</a>. For the records, CasperJS doesn&#8217;t use builtin <code class="docutils literal"><span class="pre">window.btoa()</span></code> function because it can&#8217;t deal efficiently with strings encoded using &gt;8b characters:</p>
+<div class="highlight-python"><div class="highlight"><pre>var base64;
+casper.start(&#39;http://foo.bar/&#39;, function() {
+    base64 = this.evaluate(function() {
+        return __utils__.encode(&quot;I&#39;ve been a bit cryptic recently&quot;);
+    });
+});
+
+casper.run(function() {
+    this.echo(base64).exit();
+});
+</pre></div>
+</div>
+</div>
+<div class="section" id="exists">
+<span id="index-5"></span><h3><code class="docutils literal"><span class="pre">exists()</span></code><a class="headerlink" href="#exists" title="Permalink to this headline">¶</a></h3>
+<p><strong>Signature:</strong> <code class="docutils literal"><span class="pre">exists(String</span> <span class="pre">selector)</span></code></p>
+<p>Checks if a DOM element matching a given <span class="xref std std-ref">selector expression</span> exists:</p>
+<div class="highlight-python"><div class="highlight"><pre>var exists;
+casper.start(&#39;http://foo.bar/&#39;, function() {
+    exists = this.evaluate(function() {
+        return __utils__.exists(&#39;#some_id&#39;);
+    });
+});
+
+casper.run(function() {
+    this.echo(exists).exit();
+});
+</pre></div>
+</div>
+</div>
+<div class="section" id="findall">
+<h3><code class="docutils literal"><span class="pre">findAll()</span></code><a class="headerlink" href="#findall" title="Permalink to this headline">¶</a></h3>
+<p><strong>Signature:</strong> <code class="docutils literal"><span class="pre">findAll(String</span> <span class="pre">selector)</span></code></p>
+<p>Retrieves all DOM elements matching a given <span class="xref std std-ref">selector expression</span>:</p>
+<div class="highlight-python"><div class="highlight"><pre>var links;
+casper.start(&#39;http://foo.bar/&#39;, function() {
+    links = this.evaluate(function() {
+        var elements = __utils__.findAll(&#39;a.menu&#39;);
+        return elements.map(function(e) {
+            return e.getAttribute(&#39;href&#39;);
+        });
+    });
+});
+
+casper.run(function() {
+    this.echo(JSON.stringify(links)).exit();
+});
+</pre></div>
+</div>
+</div>
+<div class="section" id="findone">
+<h3><code class="docutils literal"><span class="pre">findOne()</span></code><a class="headerlink" href="#findone" title="Permalink to this headline">¶</a></h3>
+<p><strong>Signature:</strong> <code class="docutils literal"><span class="pre">findOne(String</span> <span class="pre">selector)</span></code></p>
+<p>Retrieves a single DOM element by a <span class="xref std std-ref">selector expression</span>:</p>
+<div class="highlight-python"><div class="highlight"><pre>var href;
+casper.start(&#39;http://foo.bar/&#39;, function() {
+    href = this.evaluate(function() {
+        return __utils__.findOne(&#39;#my_id&#39;).getAttribute(&#39;href&#39;);
+    });
+});
+
+casper.run(function() {
+    this.echo(href).exit();
+});
+</pre></div>
+</div>
+</div>
+<div class="section" id="getbase64">
+<span id="index-6"></span><h3><code class="docutils literal"><span class="pre">getBase64()</span></code><a class="headerlink" href="#getbase64" title="Permalink to this headline">¶</a></h3>
+<p><strong>Signature:</strong> <code class="docutils literal"><span class="pre">getBase64(String</span> <span class="pre">url[,</span> <span class="pre">String</span> <span class="pre">method,</span> <span class="pre">Object</span> <span class="pre">data])</span></code></p>
+<p>This method will retrieved a base64 encoded version of any resource behind a url. For example, let&#8217;s imagine we want to retrieve the base64 representation of some website&#8217;s logo:</p>
+<div class="highlight-python"><div class="highlight"><pre>var logo = null;
+casper.start(&#39;http://foo.bar/&#39;, function() {
+    logo = this.evaluate(function() {
+        var imgUrl = document.querySelector(&#39;img.logo&#39;).getAttribute(&#39;src&#39;);
+        return __utils__.getBase64(imgUrl);
+    });
+});
+
+casper.run(function() {
+    this.echo(logo).exit();
+});
+</pre></div>
+</div>
+</div>
+<div class="section" id="getbinary">
+<span id="index-7"></span><h3><code class="docutils literal"><span class="pre">getBinary()</span></code><a class="headerlink" href="#getbinary" title="Permalink to this headline">¶</a></h3>
+<p><strong>Signature:</strong> <code class="docutils literal"><span class="pre">getBinary(String</span> <span class="pre">url[,</span> <span class="pre">String</span> <span class="pre">method,</span> <span class="pre">Object</span> <span class="pre">data])</span></code></p>
+<p>This method will retrieved the raw contents of a given binary resource; unfortunately though, PhantomJS cannot process these data directly so you&#8217;ll have to process them within the remote DOM environment. If you intend to download the resource, use <a class="reference internal" href="#getbase64">getBase64()</a> or <a class="reference internal" href="casper.html#casper-base64encode"><span>Casper.base64encode()</span></a> instead:</p>
+<div class="highlight-python"><div class="highlight"><pre>casper.start(&#39;http://foo.bar/&#39;, function() {
+    this.evaluate(function() {
+        var imgUrl = document.querySelector(&#39;img.logo&#39;).getAttribute(&#39;src&#39;);
+        console.log(__utils__.getBinary(imgUrl));
+    });
+});
+
+casper.run();
+</pre></div>
+</div>
+</div>
+<div class="section" id="getdocumentheight">
+<h3><code class="docutils literal"><span class="pre">getDocumentHeight()</span></code><a class="headerlink" href="#getdocumentheight" title="Permalink to this headline">¶</a></h3>
+<p><strong>Signature:</strong> <code class="docutils literal"><span class="pre">getDocumentHeight()</span></code></p>
+<div class="versionadded">
+<p><span class="versionmodified">New in version 1.0.</span></p>
+</div>
+<p>Retrieves current document height:</p>
+<div class="highlight-python"><div class="highlight"><pre>var documentHeight;
+
+casper.start(&#39;http://google.com/&#39;, function() {
+    documentHeight = this.evaluate(function() {
+        return __utils__.getDocumentHeight();
+    });
+    this.echo(&#39;Document height is &#39; + documentHeight + &#39;px&#39;);
+});
+
+casper.run();
+</pre></div>
+</div>
+</div>
+<div class="section" id="getelementbounds">
+<h3><code class="docutils literal"><span class="pre">getElementBounds()</span></code><a class="headerlink" href="#getelementbounds" title="Permalink to this headline">¶</a></h3>
+<p><strong>Signature:</strong> <code class="docutils literal"><span class="pre">getElementBounds(String</span> <span class="pre">selector)</span></code></p>
+<p>Retrieves boundaries for a DOM elements matching the provided <span class="xref std std-ref">selector</span>.</p>
+<p>It returns an Object with four keys: <code class="docutils literal"><span class="pre">top</span></code>, <code class="docutils literal"><span class="pre">left</span></code>, <code class="docutils literal"><span class="pre">width</span></code> and <code class="docutils literal"><span class="pre">height</span></code>, or <code class="docutils literal"><span class="pre">null</span></code> if the selector doesn&#8217;t exist.</p>
+</div>
+<div class="section" id="getelementsbounds">
+<h3><code class="docutils literal"><span class="pre">getElementsBounds()</span></code><a class="headerlink" href="#getelementsbounds" title="Permalink to this headline">¶</a></h3>
+<p><strong>Signature:</strong> <code class="docutils literal"><span class="pre">getElementsBounds(String</span> <span class="pre">selector)</span></code></p>
+<p>Retrieves boundaries for all DOM element matching the provided <span class="xref std std-ref">selector</span>.</p>
+<p>It returns an array of objects each having four keys: <code class="docutils literal"><span class="pre">top</span></code>, <code class="docutils literal"><span class="pre">left</span></code>, <code class="docutils literal"><span class="pre">width</span></code> and <code class="docutils literal"><span class="pre">height</span></code>.</p>
+</div>
+<div class="section" id="getelementbyxpath">
+<span id="index-8"></span><h3><code class="docutils literal"><span class="pre">getElementByXPath()</span></code><a class="headerlink" href="#getelementbyxpath" title="Permalink to this headline">¶</a></h3>
+<p><strong>Signature:</strong> <code class="docutils literal"><span class="pre">getElementByXPath(String</span> <span class="pre">expression</span> <span class="pre">[,</span> <span class="pre">HTMLElement</span> <span class="pre">scope])</span></code></p>
+<p>Retrieves a single DOM element matching a given <span class="xref std std-ref">XPath expression</span>.</p>
+<div class="versionadded">
+<p><span class="versionmodified">New in version 1.0.</span></p>
+</div>
+<p>The <code class="docutils literal"><span class="pre">scope</span></code> argument allow to set the context for executing the XPath query:</p>
+<div class="highlight-python"><div class="highlight"><pre>// will be performed against the whole document
+__utils__.getElementByXPath(&#39;.//a&#39;);
+
+// will be performed against a given DOM element
+__utils__.getElementByXPath(&#39;.//a&#39;, __utils__.findOne(&#39;div.main&#39;));
+</pre></div>
+</div>
+</div>
+<div class="section" id="getelementsbyxpath">
+<span id="index-9"></span><h3><code class="docutils literal"><span class="pre">getElementsByXPath()</span></code><a class="headerlink" href="#getelementsbyxpath" title="Permalink to this headline">¶</a></h3>
+<p><strong>Signature:</strong> <code class="docutils literal"><span class="pre">getElementsByXPath(String</span> <span class="pre">expression</span> <span class="pre">[,</span> <span class="pre">HTMLElement</span> <span class="pre">scope])</span></code></p>
+<p>Retrieves all DOM elements matching a given <span class="xref std std-ref">XPath expression</span>, if any.</p>
+<div class="versionadded">
+<p><span class="versionmodified">New in version 1.0.</span></p>
+</div>
+<p>The <code class="docutils literal"><span class="pre">scope</span></code> argument allows to set the context for executing the XPath query.</p>
+<span class="target" id="clientutils-getfieldvalue"></span></div>
+<div class="section" id="getfieldvalue">
+<span id="index-10"></span><h3><code class="docutils literal"><span class="pre">getFieldValue()</span></code><a class="headerlink" href="#getfieldvalue" title="Permalink to this headline">¶</a></h3>
+<p><strong>Signature:</strong> <code class="docutils literal"><span class="pre">getFieldValue(String</span> <span class="pre">inputName[,</span> <span class="pre">Object</span> <span class="pre">options])</span></code></p>
+<div class="versionadded">
+<p><span class="versionmodified">New in version 1.0.</span></p>
+</div>
+<p>Retrieves the value from the field named against the <code class="docutils literal"><span class="pre">inputNamed</span></code> argument:</p>
+<div class="highlight-html"><div class="highlight"><pre><span class="nt">&lt;form&gt;</span>
+    <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">&quot;text&quot;</span> <span class="na">name=</span><span class="s">&quot;plop&quot;</span> <span class="na">value=</span><span class="s">&quot;42&quot;</span><span class="nt">&gt;</span>
+<span class="nt">&lt;/form&gt;</span>
+</pre></div>
+</div>
+<p>Using the <code class="docutils literal"><span class="pre">getFieldValue()</span></code> method for <code class="docutils literal"><span class="pre">plop</span></code>:</p>
+<div class="highlight-python"><div class="highlight"><pre>__utils__.getFieldValue(&#39;plop&#39;); // 42
+</pre></div>
+</div>
+<p>Options:</p>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">formSelector</span></code>: allows to set the selector for the form containing the target field.</li>
+</ul>
+</div>
+<div class="section" id="getformvalues">
+<span id="index-11"></span><h3><code class="docutils literal"><span class="pre">getFormValues()</span></code><a class="headerlink" href="#getformvalues" title="Permalink to this headline">¶</a></h3>
+<p><strong>Signature:</strong> <code class="docutils literal"><span class="pre">getFormValues(String</span> <span class="pre">selector)</span></code></p>
+<div class="versionadded">
+<p><span class="versionmodified">New in version 1.0.</span></p>
+</div>
+<p>Retrieves a given form and all of its field values:</p>
+<div class="highlight-html"><div class="highlight"><pre><span class="nt">&lt;form</span> <span class="na">id=</span><span class="s">&quot;login&quot;</span> <span class="na">action=</span><span class="s">&quot;/login&quot;</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">&quot;text&quot;</span> <span class="na">name=</span><span class="s">&quot;username&quot;</span> <span class="na">value=</span><span class="s">&quot;foo&quot;</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">&quot;text&quot;</span> <span class="na">name=</span><span class="s">&quot;password&quot;</span> <span class="na">value=</span><span class="s">&quot;bar&quot;</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">&quot;submit&quot;</span><span class="nt">&gt;</span>
+<span class="nt">&lt;/form&gt;</span>
+</pre></div>
+</div>
+<p>To get the form values:</p>
+<div class="highlight-python"><div class="highlight"><pre>__utils__.getFormValues(&#39;form#login&#39;); // {username: &#39;foo&#39;, password: &#39;bar&#39;}
+</pre></div>
+</div>
+</div>
+<div class="section" id="log">
+<span id="index-12"></span><h3><code class="docutils literal"><span class="pre">log()</span></code><a class="headerlink" href="#log" title="Permalink to this headline">¶</a></h3>
+<p><strong>Signature:</strong> <code class="docutils literal"><span class="pre">log(String</span> <span class="pre">message[,</span> <span class="pre">String</span> <span class="pre">level])</span></code></p>
+<p>Logs a message with an optional level. Will format the message a way CasperJS will be able to log phantomjs side. Default level is <code class="docutils literal"><span class="pre">debug</span></code>:</p>
+<div class="highlight-python"><div class="highlight"><pre>casper.start(&#39;http://foo.ner/&#39;).thenEvaluate(function() {
+    __utils__.log(&quot;We&#39;ve got a problem on client side&quot;, &#39;error&#39;);
+});
+</pre></div>
+</div>
+</div>
+<div class="section" id="mouseevent">
+<h3><code class="docutils literal"><span class="pre">mouseEvent()</span></code><a class="headerlink" href="#mouseevent" title="Permalink to this headline">¶</a></h3>
+<p><strong>Signature:</strong> <code class="docutils literal"><span class="pre">mouseEvent(String</span> <span class="pre">type,</span> <span class="pre">String</span> <span class="pre">selector)</span></code></p>
+<p>Dispatches a mouse event to the DOM element behind the provided selector.</p>
+<p>Supported events are <code class="docutils literal"><span class="pre">mouseup</span></code>, <code class="docutils literal"><span class="pre">mousedown</span></code>, <code class="docutils literal"><span class="pre">click</span></code>, <code class="docutils literal"><span class="pre">mousemove</span></code>, <code class="docutils literal"><span class="pre">mouseover</span></code> and <code class="docutils literal"><span class="pre">mouseout</span></code>.</p>
+</div>
+<div class="section" id="removeelementsbyxpath">
+<span id="index-13"></span><h3><code class="docutils literal"><span class="pre">removeElementsByXPath()</span></code><a class="headerlink" href="#removeelementsbyxpath" title="Permalink to this headline">¶</a></h3>
+<p><strong>Signature:</strong> <code class="docutils literal"><span class="pre">removeElementsByXPath(String</span> <span class="pre">expression)</span></code></p>
+<p>Removes all DOM elements matching a given <span class="xref std std-ref">XPath expression</span>.</p>
+</div>
+<div class="section" id="sendajax">
+<span id="index-14"></span><h3><code class="docutils literal"><span class="pre">sendAJAX()</span></code><a class="headerlink" href="#sendajax" title="Permalink to this headline">¶</a></h3>
+<p><strong>Signature:</strong> <code class="docutils literal"><span class="pre">sendAJAX(String</span> <span class="pre">url[,</span> <span class="pre">String</span> <span class="pre">method,</span> <span class="pre">Object</span> <span class="pre">data,</span> <span class="pre">Boolean</span> <span class="pre">async,</span> <span class="pre">Object</span> <span class="pre">settings])</span></code></p>
+<div class="versionadded">
+<p><span class="versionmodified">New in version 1.0.</span></p>
+</div>
+<p>Sends an AJAX request, using the following parameters:</p>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">url</span></code>: The url to request.</li>
+<li><code class="docutils literal"><span class="pre">method</span></code>: The HTTP method (default: <code class="docutils literal"><span class="pre">GET</span></code>).</li>
+<li><code class="docutils literal"><span class="pre">data</span></code>: Request parameters (default: <code class="docutils literal"><span class="pre">null</span></code>).</li>
+<li><code class="docutils literal"><span class="pre">async</span></code>: Flag for an asynchroneous request? (default: <code class="docutils literal"><span class="pre">false</span></code>)</li>
+<li><code class="docutils literal"><span class="pre">settings</span></code>: Other settings when perform the AJAX request (default: <code class="docutils literal"><span class="pre">null</span></code>)</li>
+</ul>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p>Don&#8217;t forget to pass the <code class="docutils literal"><span class="pre">--web-security=no</span></code> option in your CLI call in order to perform cross-domains requests when needed:</p>
+<div class="last highlight-python"><div class="highlight"><pre>var data, wsurl = &#39;http://api.site.com/search.json&#39;;
+
+casper.start(&#39;http://my.site.com/&#39;, function() {
+    data = this.evaluate(function(wsurl) {
+        return JSON.parse(__utils__.sendAJAX(wsurl, &#39;GET&#39;, null, false));
+    }, {wsurl: wsurl});
+});
+
+casper.then(function() {
+    require(&#39;utils&#39;).dump(data);
+});
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="visible">
+<h3><code class="docutils literal"><span class="pre">visible()</span></code><a class="headerlink" href="#visible" title="Permalink to this headline">¶</a></h3>
+<p><strong>Signature:</strong> <code class="docutils literal"><span class="pre">visible(String</span> <span class="pre">selector)</span></code></p>
+<p>Checks if an element is visible:</p>
+<div class="highlight-python"><div class="highlight"><pre>var logoIsVisible = casper.evaluate(function() {
+    return __utils__.visible(&#39;h1&#39;);
+});
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Document Outline</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">The <code class="docutils literal"><span class="pre">clientutils</span></code> module</a><ul>
+<li><a class="reference internal" href="#index-2">Bookmarklet</a></li>
+<li><a class="reference internal" href="#clientutils-prototype"><code class="docutils literal"><span class="pre">ClientUtils</span></code> prototype</a><ul>
+<li><a class="reference internal" href="#echo"><code class="docutils literal"><span class="pre">echo()</span></code></a></li>
+<li><a class="reference internal" href="#encode"><code class="docutils literal"><span class="pre">encode()</span></code></a></li>
+<li><a class="reference internal" href="#exists"><code class="docutils literal"><span class="pre">exists()</span></code></a></li>
+<li><a class="reference internal" href="#findall"><code class="docutils literal"><span class="pre">findAll()</span></code></a></li>
+<li><a class="reference internal" href="#findone"><code class="docutils literal"><span class="pre">findOne()</span></code></a></li>
+<li><a class="reference internal" href="#getbase64"><code class="docutils literal"><span class="pre">getBase64()</span></code></a></li>
+<li><a class="reference internal" href="#getbinary"><code class="docutils literal"><span class="pre">getBinary()</span></code></a></li>
+<li><a class="reference internal" href="#getdocumentheight"><code class="docutils literal"><span class="pre">getDocumentHeight()</span></code></a></li>
+<li><a class="reference internal" href="#getelementbounds"><code class="docutils literal"><span class="pre">getElementBounds()</span></code></a></li>
+<li><a class="reference internal" href="#getelementsbounds"><code class="docutils literal"><span class="pre">getElementsBounds()</span></code></a></li>
+<li><a class="reference internal" href="#getelementbyxpath"><code class="docutils literal"><span class="pre">getElementByXPath()</span></code></a></li>
+<li><a class="reference internal" href="#getelementsbyxpath"><code class="docutils literal"><span class="pre">getElementsByXPath()</span></code></a></li>
+<li><a class="reference internal" href="#getfieldvalue"><code class="docutils literal"><span class="pre">getFieldValue()</span></code></a></li>
+<li><a class="reference internal" href="#getformvalues"><code class="docutils literal"><span class="pre">getFormValues()</span></code></a></li>
+<li><a class="reference internal" href="#log"><code class="docutils literal"><span class="pre">log()</span></code></a></li>
+<li><a class="reference internal" href="#mouseevent"><code class="docutils literal"><span class="pre">mouseEvent()</span></code></a></li>
+<li><a class="reference internal" href="#removeelementsbyxpath"><code class="docutils literal"><span class="pre">removeElementsByXPath()</span></code></a></li>
+<li><a class="reference internal" href="#sendajax"><code class="docutils literal"><span class="pre">sendAJAX()</span></code></a></li>
+<li><a class="reference internal" href="#visible"><code class="docutils literal"><span class="pre">visible()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+<h3><a href="../index.html">Table Of Contents</a></h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../01/$_convention.html">Words and Formats used in Proposal</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../00_dir/$_00-prologue.html">Prologue</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../01_dir/$_01-convention.html">Words and Formats used in Proposal</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../02_dir/$_02-core.html">Features - Core</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../03_dir/$_03-detail.html">Features - Core with Detail</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../04_dir/$_04-fda.html">Features - FDA Labeling Specifications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../06_dir/$_06-future.html">Features - Future</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../07_dir/$_07-glossary.html">Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../10_dir/$_10-term-project.html">Terms related to Project</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../11_dir/$_11-term-ontology.html">Terms imported from Ontologies</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../13_dir/$_13-bibliography.html">Bibliographies</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../15_dir/$_15-ontomatica.html">Ontomatica</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../12_dir/$_12-epilogue.html">Epilogue</a></li>
+</ul>
+<h3>Index</h3>
+<p><a href="../genindex.html">Thesaurus</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../_sources/modules/clientutils.txt"
+           rel="nofollow">Show Source</a></li>
+   
+  </ul>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="nav-item nav-item-0"><a href="../index.html">CasperJS  documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &copy; Copyright 2011-2015 Nicolas Perriault and contributors. CasperJS logo by Jeremy Forveille.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.1.
+    </div>
+  </body>
+</html>

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # CasperJS
 
 >**Important note:** the `master` branch hosts the development version of CasperJS, which is now pretty stable and should be the right version to use if you ask me.
@@ -92,3 +93,6 @@ To view the source files on github, head to [the gh-pages branch](https://github
 ## License
 
 MIT
+=======
+
+>>>>>>> 74c192e4b0670ddb5a81eee3b2549226bc67f8ae
